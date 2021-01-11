@@ -173,8 +173,10 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 			});
 		}
 		console.log("<<cronTaskParamsArr сформирован>>");
-		console.log(cronTaskParamsArr);
+		//console.log(cronTaskParamsArr);
 		return cronTaskParamsArr;
+	}).then(cronTaskParamsArr=>{
+		checkAndstartCronTasks(cronTaskParamsArr);
 	}).catch(err=>console.log(err));
  }
 
@@ -194,12 +196,14 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 
  //let checkAndstartCronTasks = async (cronTaskParamsArr) => {
 	let checkAndstartCronTasks = (cronTaskParamsArr) => {
-	cronTaskParamsArr.forEach((cronTaskParamsObj)=> {
+		console.log(`<<cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
+		cronTaskParamsArr.forEach((cronTaskParamsObj)=> {
+		
 		const { cronTaskName, cronTaskTime, cronTaskPeriod, cronStartDay, cronStartMonth, cronStartYear, cronStartHour, cronStartMinute, cronStartWeekDay, cronTimeZone, emailAddress, emailCapt, emailText } = cronTaskParamsObj;
 		const currDate = new Date();
 		const currDay = Number(currDate.getDate());
 		const currWeekDay = Number(currDate.getDay());
-		const currMonth = Number(currDate.getMonth());
+		const currMonth = Number(currDate.getMonth())+1;
 		const currYear = Number(currDate.getFullYear());
 		const workWeekDays = [1,2,3,4,5];
         //!!! Привести типы чтобы совпадали !!!
@@ -209,31 +213,40 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 				if ((currDay===cronStartDay) && (currMonth===cronStartMonth) && (currYear===cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
 			}
 			case (repeatMap.evday): {  // Ежедневно
 				if ((currDay>=cronStartDay) && (currMonth>=cronStartMonth) && (currYear>=cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
 			}
 			case repeatMap.evweek: {  // Еженедельно
 				if ((currWeekDay===cronStartWeekDay) && (currDay>=cronStartDay) && (currMonth>=cronStartMonth) && (currYear>=cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
 			}
 			case repeatMap.evwkweek: {  // ПН-ПТ
 				if ((workWeekDays.includes(currWeekDay)) && (currDay>=cronStartDay) && (currMonth>=cronStartMonth) && (currYear>=cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
 			}
 			case repeatMap.evmonth: {  // Ежемесячно
 				if ((currDay===cronStartDay) && (currMonth>=cronStartMonth) && (currYear>=cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
 			}
 			case repeatMap.evyear: {  // Ежегодно
 				if ((currDay===cronStartDay) && (currMonth===cronStartMonth) && (currYear>=cronStartYear)) {
 					startCronTasks(cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText);
 				}
+				break;
+			}
+			default: {
+				console.log("<<проверка и старт задач по cronTaskParamsArr - отсутствуют задачи для старта>>")
 			}
 		}
 	});
@@ -376,10 +389,10 @@ app.post("/", function (request, response) {
 			///!!!!
 			//cronTaskParamsArr = []; // очищаем массив
 			//while (cronTaskParamsArr.length) { cronTaskParamsArr.pop(); }
-			const cronTaskParamsArr = createCronTaskParams();	
-			console.log("<<запуск checkAndstartCronTasks>>")
-			console.log(cronTaskParamsArr)
-			checkAndstartCronTasks(cronTaskParamsArr);
+			createCronTaskParams();	
+			//console.log("<<запуск checkAndstartCronTasks>>")
+			//console.log(cronTaskParamsArr)
+			//heckAndstartCronTasks(cronTaskParamsArr);
 			///!!!
 
 		}
