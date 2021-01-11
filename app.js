@@ -17,8 +17,8 @@ const repeatMap = {
  "evyear" : "Ежегодно"
 }
 
-const cronTasks={};
-const cronTaskParamsArr = [];
+let cronTasks={};
+//const cronTaskParamsArr = [];
 
 // const cronTaskParamsArr = [
 // 	{cronTaskName: "test_test_1",
@@ -46,23 +46,23 @@ const cronTaskParamsArr = [];
   });
 
   // запускаем все cron tasks, чтобы с учетом изменений + на случай падения сервера
-  cron.schedule('0 0 * * *', () =>
-  {
-	(async () => {
-		console.log(`tasks: starting all for - ${new Date()}` );
-		try{
-			//let cronTaskParamsArr = await createCronTaskParams();
-			//await checkAndstartCronTasks(cronTaskParamsArr);
-			let cronTaskParamsArr = createCronTaskParams();
-			checkAndstartCronTasks(cronTaskParamsArr);
-		}catch(e){
-			console.log(e);
-		}
-	  })();
-	}, {
-	scheduled: true,
-	timezone: TIMEZONE
-  });
+//   cron.schedule('0 0 * * *', () =>
+//   {
+// 	(async () => {
+// 		console.log(`tasks: starting all for - ${new Date()}` );
+// 		try{
+// 			//let cronTaskParamsArr = await createCronTaskParams();
+// 			//await checkAndstartCronTasks(cronTaskParamsArr);
+// 			let cronTaskParamsArr = createCronTaskParams();
+// 			checkAndstartCronTasks(cronTaskParamsArr);
+// 		}catch(e){
+// 			console.log(e);
+// 		}
+// 	  })();
+// 	}, {
+// 	scheduled: true,
+// 	timezone: TIMEZONE
+//   });
 
 //async function sendEmail(emailAddress, emailCapt, emailText){
 let sendEmail = async (emailAddress, emailCapt, emailText)=>{	
@@ -99,16 +99,18 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 	return `${nemail}_${ndate}_${nrepeat}`;
  }
 
- // формируем параметры для полного списока cron задач
+ // формируем параметры для полного списка cron задач
  //let createCronTaskParams = async () => {
 	let createCronTaskParams = () => {
-	PersBD.findAll({
-		attributes:['bdData','email']
-	}).then(res=>{
-		console.log(`<<получены данные bdData из базы>>`);
-		console.log(res);
-		return(res)
-	}).then(res=>{
+		const cronTaskParamsArr = [];
+		//cronTaskParamsArr = []; // очищаем массив
+		PersBD.findAll({
+			attributes:['bdData','email']
+		}).then(res=>{
+			console.log(`<<получены данные bdData из базы>>`);
+			console.log(res);
+			return(res)
+		}).then(res=>{
 		if (res){
 			res.forEach(row => {
 				try{
@@ -132,13 +134,13 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 							const date = bdDate.split(", ")[0];
 							const time = bdDate.split(", ")[1];
 							if (date && time){
-								const day = date.split(".")[0];
-								const month = date.split(".")[1];
-								const year = date.split(".")[2];
-								const hour = time.split(":")[0];
-								const minute = time.split(":")[1];
+								const day = Number(date.split(".")[0]);
+								const month = Number(date.split(".")[1]);
+								const year = Number(date.split(".")[2]);
+								const hour = Number(time.split(":")[0]);
+								const minute = Number(time.split(":")[1]);
 								if (day && month && year && hour && minute){
-									const weekDay = moment(date, "DD.MM.YYYY").day();
+									const weekDay = Number(moment(date, "DD.MM.YYYY").day());
 									const ndate = `${day}${month}${year}${hour}${minute}`;
 									const cronTime = `${minute} ${hour} * * *`;
 									const emailCapt = `Уведомление mynotif.ru - ${persName}`;
@@ -172,7 +174,7 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 		}
 		console.log("<<cronTaskParamsArr сформирован>>");
 		console.log(cronTaskParamsArr);
-		//return cronTaskParamsArr;
+		return cronTaskParamsArr;
 	}).catch(err=>console.log(err));
  }
 
@@ -195,11 +197,11 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 	cronTaskParamsArr.forEach((cronTaskParamsObj)=> {
 		const { cronTaskName, cronTaskTime, cronTaskPeriod, cronStartDay, cronStartMonth, cronStartYear, cronStartHour, cronStartMinute, cronStartWeekDay, cronTimeZone, emailAddress, emailCapt, emailText } = cronTaskParamsObj;
 		const currDate = new Date();
-		const currDay = currDate.getDate();
-		const currWeekDay = currDate.getDay();
-		const currMonth = currDate.getMonth();
-		const currYear = currDate.getFullYear();
-		const workWeekDays = ["1","2","3","4","5"];
+		const currDay = Number(currDate.getDate());
+		const currWeekDay = Number(currDate.getDay());
+		const currMonth = Number(currDate.getMonth());
+		const currYear = Number(currDate.getFullYear());
+		const workWeekDays = [1,2,3,4,5];
         //!!! Привести типы чтобы совпадали !!!
 
 		switch (cronTaskPeriod) {
@@ -324,7 +326,7 @@ app.use(express.json());
 
 app.get("/load", function(request,response){
 	let currUserEmail = request.query.currUserEmail;
-	//console.log(currUserEmail);
+	//console.log(currUserEmail); 
 	if (currUserEmail){
 		//console.log(currUserEmail);
 		currUserEmail = currUserEmail.replace(/"/g,'');
@@ -357,17 +359,27 @@ app.post("/", function (request, response) {
 			//startCronTasks(cronTaskParamsArr);
 
 			///!!!
-			(async () => {
-				console.log(`tasks: starting all for - ${new Date()}` );
-				try{
-					//let cronTaskParamsArr = createCronTaskParams();
-					createCronTaskParams();
-					console.log("<<await checkAndstartCronTasks(cronTaskParamsArr);>>")
-					checkAndstartCronTasks(cronTaskParamsArr);
-				}catch(e){
-					console.log(e);
-				}
-			  })();
+			// (async () => {
+			// 	console.log(`tasks: starting all for - ${new Date()}` );
+			// 	try{
+			// 		//let cronTaskParamsArr = createCronTaskParams();
+			// 		//cronTaskParamsArr = []; // очищаем массив
+			// 		createCronTaskParams();	
+			// 		console.log("<<await checkAndstartCronTasks(cronTaskParamsArr);>>")
+			// 		checkAndstartCronTasks(cronTaskParamsArr);
+			// 	}catch(e){
+			// 		console.log(e);//
+			// 	}
+			//   })();
+			///!!!
+
+			///!!!!
+			//cronTaskParamsArr = []; // очищаем массив
+			//while (cronTaskParamsArr.length) { cronTaskParamsArr.pop(); }
+			const cronTaskParamsArr = createCronTaskParams();	
+			console.log("<<запуск checkAndstartCronTasks>>")
+			console.log(cronTaskParamsArr)
+			checkAndstartCronTasks(cronTaskParamsArr);
 			///!!!
 
 		}
