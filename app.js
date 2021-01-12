@@ -5,17 +5,15 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const app = express();
+const config = require('./config.js');
 
-const TIMEZONE = "Asia/Yekaterinburg";
-//const TIMEZONE = "Europe/Moscow";
-const repeatMap = {
- "norep" : "Без повторов",
- "evday" : "Ежедневно",
- "evweek" : "Еженедельно",
- "evwkweek" : "ПН-ПТ",
- "evmonth" : "Ежемесячно",
- "evyear" : "Ежегодно"
-}
+const TIMEZONE = config.TIMEZONE;
+const repeatMap = config.repeatMap;
+const timeStopCronTasks = config.timeStopCronTasks;
+const timeStartCronTasks = config.timeStartCronTasks;
+const sendEmailConfig = config.sendEmailConfig;
+const fromSendEmailAddress = config.fromSendEmailAddress;
+const sequelizeConfig = config.sequelizeConfig;
 
 let cronTasks={};
 //const cronTaskParamsArr = [];
@@ -32,11 +30,9 @@ let cronTasks={};
 // 	 emailText: "задача 2"
 // 	},
 // ];
-
-
-
+10
   // останавливаем все cron tasks, чтобы запустить с учетом изменений
-  cron.schedule('57 23 * * *', () => 
+  cron.schedule(timeStopCronTasks, () => 
   {
 	console.log('tasks: destroy all');
 	stopCronTasks(cronTasks);
@@ -46,38 +42,29 @@ let cronTasks={};
   });
 
   // запускаем все cron tasks, чтобы с учетом изменений + на случай падения сервера
-//   cron.schedule('0 0 * * *', () =>
-//   {
-// 	(async () => {
-// 		console.log(`tasks: starting all for - ${new Date()}` );
-// 		try{
-// 			//let cronTaskParamsArr = await createCronTaskParams();
-// 			//await checkAndstartCronTasks(cronTaskParamsArr);
-// 			let cronTaskParamsArr = createCronTaskParams();
-// 			checkAndstartCronTasks(cronTaskParamsArr);
-// 		}catch(e){
-// 			console.log(e);
-// 		}
-// 	  })();
-// 	}, {
-// 	scheduled: true,
-// 	timezone: TIMEZONE
-//   });
+  cron.schedule(timeStartCronTasks, () =>
+  {
+	console.log('tasks: start today all');
+	createParamsCheckAndStartCronTasks();
+	}, {
+	scheduled: true,
+	timezone: TIMEZONE
+  });
 
 //async function sendEmail(emailAddress, emailCapt, emailText){
 let sendEmail = async (emailAddress, emailCapt, emailText)=>{	
 	let transporter = nodemailer.createTransport({
-	host: "smtp.yandex.ru",
-	port: 465,
-	secure: true,
+	host: sendEmailConfig.host,
+	port: sendEmailConfig.port,
+	secure: sendEmailConfig.secure,
 	auth: {
-		user: "my-notif@yandex.ru",
-		pass: "MM24686421x" 
+		user: sendEmailConfig.auth.user,
+		pass: sendEmailConfig.auth.pass 
 	}
 	});
 	// send email
 	let emailInfo = await transporter.sendMail({
-		from: "my-notif@yandex.ru", 
+		from: sendEmailConfig.auth.user, 
 		to: emailAddress, 
 		subject: emailCapt, 
 		//text: text, 
@@ -99,9 +86,11 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 	return `${nemail}_${ndate}_${nrepeat}`;
  }
 
- // формируем параметры для полного списка cron задач
+
  //let createCronTaskParams = async () => {
-	let createCronTaskParams = () => {
+	//let createCronTaskParams = () => {
+	let	createParamsCheckAndStartCronTasks = () => {
+		 // формируем параметры для полного списка cron задач
 		const cronTaskParamsArr = [];
 		//cronTaskParamsArr = []; // очищаем массив
 		PersBD.findAll({
@@ -288,7 +277,7 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 	}
  };
 
-const sequelize = new Sequelize("mynotif", "root", "root", {
+const sequelize = new Sequelize(sequelizeConfig.DBName, sequelizeConfig.DBLogin, sequelizeConfig.DBPass, {
 	dialect: "mysql",
 	define: {
 	  timestamps: false
@@ -317,7 +306,7 @@ PersBD.init({
 	}
 },{
 	sequelize,
- 	modelName: "persbd"
+ 	modelName: sequelizeConfig.modelName
 });
 
 try{
