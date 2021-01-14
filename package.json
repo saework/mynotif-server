@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "node-cron": "^2.0.3",

@@ -1,11 +1,14 @@
 const express = require("express");
 const cron = require('node-cron');
 const moment = require('moment'); 
+const _ = require('lodash');
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const app = express();
 const config = require('./config.js');
+
+//!!! добавить защиту от sql-инъекций для форм !!!
 
 const TIMEZONE = config.TIMEZONE;
 const repeatMap = config.repeatMap;
@@ -16,35 +19,21 @@ const fromSendEmailAddress = config.fromSendEmailAddress;
 const sequelizeConfig = config.sequelizeConfig;
 
 let cronTasks={};
-//const cronTaskParamsArr = [];
 
-// const cronTaskParamsArr = [
-// 	{cronTaskName: "test_test_1",
-// 	 cronTaskTime: "08 00 * * *",
-// 	 emailAddress: "saework@ya.ru",
-// 	 emailText: "задача 1"
-// 	},
-// 	{cronTaskName: "test_test_2",
-// 	 cronTaskTime: "09 00 * * *",
-// 	 emailAddress: "saework@ya.ru",
-// 	 emailText: "задача 2"
-// 	},
-// ];
-10
-  // останавливаем все cron tasks, чтобы запустить с учетом изменений
+  // останавливаем все cron tasks, для перезапуска с учетом изменений
   cron.schedule(timeStopCronTasks, () => 
   {
-	console.log('tasks: destroy all');
+	console.log('<< tasks: destroy all >>');
 	stopCronTasks(cronTasks);
 	}, {
 	scheduled: true,
 	timezone: TIMEZONE
   });
 
-  // запускаем все cron tasks, чтобы с учетом изменений + на случай падения сервера
+  // запускаем на ожидание все cron tasks на сегодня, с учетом изменений
   cron.schedule(timeStartCronTasks, () =>
   {
-	console.log('tasks: start today all');
+	console.log('<< tasks: start waiting all - for today>>');
 	createParamsCheckAndStartCronTasksForAll();
 	}, {
 	scheduled: true,
@@ -92,18 +81,9 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
  }
 
 
-let createCronTaskParamObjs = (cronTaskParamsArr, row) => {
+let createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
 	try{
-		//const bdDataString = row[0].dataValues.bdData;
-		const bdDataString = row.dataValues.bdData;
-		//const bdRows = JSON.parse(bdDataString).bdRows;
-		const bdData = JSON.parse(bdDataString);
-		console.log(bdData);
-		const bdRows = bdData.bdRows;
-		console.log(bdRows);
-		const email = row.dataValues.email;
-		//console.log(bdData);
-		if (bdRows && email){
+		if (bdRows.length > 0 && email){
 			bdRows.forEach(bdRow => {
 			const bdDate = bdRow.bdDate;
 			const bdPeriod = bdRow.bdPeriod;
@@ -141,7 +121,7 @@ let createCronTaskParamObjs = (cronTaskParamsArr, row) => {
 							 emailCapt: emailCapt,
 							 emailText: emailText
 							}
-						cronTaskParamsArr.push(cronTaskParamsObj); //
+						cronTaskParamsArr.push(cronTaskParamsObj); 
 					}
 				}
 			}
@@ -151,55 +131,6 @@ let createCronTaskParamObjs = (cronTaskParamsArr, row) => {
 		console.log(e);
 	}
 }
-
-let updateCronTasksForUser = (email)=>{
-	stopCronTasks(cronTasks, email);
-
-}
-
-// let findCronTaskParamsByUserEmail = (currUserEmail) => {
-// 	if (currUserEmail){
-// 		PersBD.findAll({
-// 			attributes:['bdData'],
-// 			where:{
-// 				email:currUserEmail
-// 			}
-// 		}).then(res=>{
-// 			console.log(`<<получены данные из базы для - ${currUserEmail} >>`);
-// 			//console.log(res);
-// 			return(res)
-// 		}).then(res=>{
-// 			if (res){
-
-
-
-
-// let	createParamsCheckAndStartCronTasksByEmail = (currUserEmail) => {
-// 	// формируем параметры для полного списка cron задач пользователя
-// 	const cronTaskParamsArr = [];
-// 	PersBD.findAll({
-// 		attributes:['bdData'],
-// 		where:{
-// 			email:currUserEmail
-// 		}
-// 	}).then(res=>{
-// 		console.log(`<<получены данные bdData из базы>>`);
-// 		console.log(res);
-// 		return(res)
-// 	}).then(res=>{
-// 	if (res){
-// 		res.forEach(row => {
-// 			createCronTaskParamObjs(row, cronTaskParamsArr)
-// 		});
-// 	}
-// 	console.log("<<cronTaskParamsArr сформирован>>");
-// 	//console.log(cronTaskParamsArr);
-// 	return cronTaskParamsArr;
-// 	}).then(cronTaskParamsArr=>{
-// 		checkAndstartCronTasks(cronTaskParamsArr, row);
-// 	}).catch(err=>console.log(err));
-//  }
-
 
 let	createParamsCheckAndStartCronTasksForAll = () => {
 	// формируем параметры для полного списка cron задач
@@ -213,7 +144,16 @@ let	createParamsCheckAndStartCronTasksForAll = () => {
 	}).then(res=>{
 	if (res){
 		res.forEach(row => {
-			createCronTaskParamObjs(cronTaskParamsArr, row)
+			//const bdDataString = row[0].dataValues.bdData;
+			const bdDataString = row.dataValues.bdData;
+			//const bdRows = JSON.parse(bdDataString).bdRows;
+			const bdData = JSON.parse(bdDataString);
+			console.log(bdData);
+			const bdRows = bdData.bdRows;
+			console.log(bdRows);
+			const email = row.dataValues.email;
+			//console.log(bdData);
+			createCronTaskParamObjs(cronTaskParamsArr, bdRows, email)
 		});
 	}
 	console.log("<<cronTaskParamsArr сформирован>>");
@@ -240,7 +180,7 @@ let	createParamsCheckAndStartCronTasksForAll = () => {
 
  //let checkAndstartCronTasks = async (cronTaskParamsArr) => {
 	let checkAndStartCronTasks = (cronTaskParamsArr) => {
-		console.log(cronTaskParamsArr.length)
+		//console.log(cronTaskParamsArr.length)
 		console.log(`<<cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
 		cronTaskParamsArr.forEach((cronTaskParamsObj)=> {
 		
@@ -295,37 +235,13 @@ let	createParamsCheckAndStartCronTasksForAll = () => {
 			}
 		}
 	});
-	console.log("<<проверка и старт задач по cronTaskParamsArr - завершено >>")
+	console.log("<<проверка и старт задач по cronTaskParamsArr - завершено >>");
+	console.log(cronTasks);
  };
  
-
-//  let startCronTasks = (cronTaskParamsArr) => {
-// 	cronTaskParamsArr.forEach(function(cronTaskParamsObj) 
-// 	{
-// 		const cronTaskName=cronTaskParamsObj.cronTaskName;
-// 		const cronTaskTime=cronTaskParamsObj.cronTaskTime;
-// 		const emailAddress=cronTaskParamsObj.emailAddress;
-// 		const emailText=cronTaskParamsObj.emailText;
-// 		const now = new Date();
-// 		cronTasks[cronTaskName] = cron.schedule(cronTaskTime, () => 
-// 		{
-// 		  console.log(`Task - start - ${cronTaskName} - ${now}`);
-// 		  sendEmail(emailText, emailAddress).catch(console.error);
-// 		}, {
-// 		  scheduled: true,
-// 		  timezone: TIMEZONE
-// 		});
-// 		console.log(`Task - start waiting - ${cronTaskName} - ${now}`);
-// 		cronTasks[cronTaskName].start();	
-
-// 		//createCronTaskParams("test@test");
-// 		createCronTaskParams();
-// 	});
-//  };
-
  let stopCronTasks = (cronTasks, email = "all") => {
 	 //console.log(cronTasks);
-	 if (cronTasks){
+	 if (!_.isEmpty(cronTasks)){
 		let nemail;
 		if (email !== "all"){
 			nemail = getCronEmailName(email)
@@ -341,6 +257,7 @@ let	createParamsCheckAndStartCronTasksForAll = () => {
 				}
 		}
 	}
+	return true;
  };
 
 const sequelize = new Sequelize(sequelizeConfig.DBName, sequelizeConfig.DBLogin, sequelizeConfig.DBPass, {
@@ -418,44 +335,45 @@ app.get("/sel",function(request,response){
 	console.log(request);
 })
 
-let updateAndStartCronTasks = (bdRowsArr)=>{	
+let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{	
 	const cronTaskParamsArr = [];
-	let updCronPromise = new Promise(() => {
-		if (bdRowsArr.length > 0){
-			bdRowsArr.forEach(row => {
-				console.log(row);
-				createCronTaskParamObjs(cronTaskParamsArr, row)
-			});
-			console.log("<<cronTaskParamsArr сформирован>>");
-		}		
-		//console.log(cronTaskParamsArr);
-		return cronTaskParamsArr;
-	}).then(cronTaskParamsArr=>{
-		checkAndStartCronTasks(cronTaskParamsArr);
+	new Promise((res) => {
+		const stopCronTasksResult = stopCronTasks(cronTasks, currUserEmail);
+		res(stopCronTasksResult);
+	}).then(()=>{
+		return new Promise((res) => {
+			if (bdRowsArr.length > 0){
+				createCronTaskParamObjs(cronTaskParamsArr, bdRowsArr, currUserEmail)
+				console.log("<<cronTaskParamsArr сформирован>>");
+			}		
+			res(cronTaskParamsArr);
+		});
+	}).then(()=>{
+		if (cronTaskParamsArr.length > 0){
+			console.log("<<запуск функции checkAndStartCronTasks>>");
+			checkAndStartCronTasks(cronTaskParamsArr);
+		}else{
+			console.log("<<массив cronTaskParamsArr пуст>>");
+		}	
 	}).catch(err=>console.log(err));
 }
 
 app.post("/", function (request, response) {
-    //if(!request.body) return response.sendStatus(400);
-	//console.log(request.body.data)
 	if (request.body.data){
 		const date = request.body.data;
 		if (date === "startCronTasks" ){
-			//cronTaskParamsArr = []; // очищаем массив
-			//while (cronTaskParamsArr.length) { cronTaskParamsArr.pop(); }
 			createParamsCheckAndStartCronTasksForAll();
 		}
 		if (date === "stopCronTasks" ){
 			stopCronTasks(cronTasks);
 		}
 		if ((date != "startCronTasks" ) && (date != "stopCronTasks" )){
-
-			console.log(request.body.data);
+			//console.log(request.body.data);
 			const bdRows = JSON.stringify(request.body.data.bdRows);
+			const bdRowsArr = request.body.data.bdRows.bdRows;
 			let currUserEmail = JSON.stringify(request.body.data.currUserEmail);	
 			//console.log(currUserEmail);
 			if (currUserEmail){	
-				//const cronTaskParamsArr = [];
 				currUserEmail = currUserEmail.replace(/"/g,'');
 				PersBD.findAll({
 					where:{
@@ -464,38 +382,28 @@ app.post("/", function (request, response) {
 				}).then(res=>{
 					console.log(res)
 					if (res.length>0){
-						console.log("<<изменение записи в базе>>")
+						console.log(`<< изменение записи в базе (изменены задачи пользователя: ${currUserEmail} >>`);
 						PersBD.update({ bdData: bdRows }, {
 							where: {
 							email: currUserEmail
 							}
 						}).then((res) => {
-							console.log(res[0]);
 							if (res[0] === 1){
-								const bdRowsArr = request.body.data.bdRows.bdRows;
-								updateAndStartCronTasks(bdRowsArr);
+								console.log("<< запуск функции updateAndStartCronTasks >>");
+								updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
 							}
-//!!!
-							// if (res){
-							// 	res.forEach(row => {
-							// 		createCronTaskParamObjs(cronTaskParamsArr, row)
-							// 	});
-							// }
-							// console.log("<<cronTaskParamsArr сформирован>>");
-							// //console.log(cronTaskParamsArr);
-							// return cronTaskParamsArr;
-							// }).then(cronTaskParamsArr=>{
-							// 	checkAndStartCronTasks(cronTaskParamsArr);
-							 }).catch(err=>console.log(err));
-///!!!
-
+						}).catch(err=>console.log(err));
 					}else{
-						console.log("<<добавление записи в базу>>")
+						console.log(`<< добавление записи в базу (добавлен новый пользователь и его задачи: ${currUserEmail} >>`);
 						PersBD.create({
 							email: currUserEmail,
 							bdData: bdRows
 						}).then(res=>{
-							console.log(res);
+							//console.log(res);
+							if (!_.isEmpty(res)){
+								console.log("запуск функции updateAndStartCronTasks");
+								updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
+							}
 						}).catch(err=>console.log(err));
 					}
 					response.send("<<данные таблицы обновлены>>");
@@ -507,69 +415,8 @@ app.post("/", function (request, response) {
     //response.send("!!!");
 });
 
+	console.log('<< tasks: start waiting all - after restart server >>');
+	createParamsCheckAndStartCronTasksForAll();
+
 app.listen(3000);
 
-//
-// let findCronTaskParamsByUserEmail = (currUserEmail) => {
-// 	if (currUserEmail){
-// 		PersBD.findAll({
-// 			attributes:['bdData'],
-// 			where:{
-// 				email:currUserEmail
-// 			}
-// 		}).then(res=>{
-// 			console.log(`<<получены данные из базы для - ${currUserEmail} >>`);
-// 			//console.log(res);
-// 			return(res)
-// 		}).then(res=>{
-// 			if (res){
-// 				try{
-// 					const bdDataString = res[0].dataValues.bdData;
-// 					const bdRows = JSON.parse(bdDataString).bdRows;
-// 					//console.log(bdData);
-// 					if (bdRows){
-// 						bdRows.forEach(bdRow => {
-// 						const bdDate = bdRow.bdDate;
-// 						const bdPeriod = bdRow.bdPeriod;
-// 						if (bdDate && bdPeriod){
-// 							const date = bdDate.split(", ")[0];
-// 							const time = bdDate.split(", ")[1];
-// 							if (date && time){
-// 								const day = date.split(".")[0];
-// 								const month = date.split(".")[1];
-// 								const year = date.split(".")[2];
-// 								const hour = date.split(":")[0];
-// 								const minute = date.split(":")[1];
-// 								if (day && month && hour && minute){
-
-// 									// cronTaskParamsArr = [
-// 									// 	{cronTaskName: "test_test_1",
-// 									// 	 cronTaskTime: "08 00 * * *",
-// 									// 	 emailAddress: "saework@ya.ru",
-// 									// 	 emailText: "задача 1"
-// 									// 	},
-
-
-// 									// let cronTaskTime;
-// 									// switch (bdPeriod) {
-// 									// 	case "Без повторов": {
-// 									// 		cronTaskTime = `${minute} ${hour} ${hour} ${day} ${month}`
-// 									// 	}
-// 									// 	case "Ежедневно": {
-// 									// 		cronTaskTime = `${minute} ${hour} ${hour} ${day} ${month}`
-// 									// 	}
-// 									// }
-// 								}
-// 							}
-
-// 						}
-						
-// 						});
-// 					}
-// 				}catch(e){
-// 					console.log(e);
-// 				}
-// 			}
-// 		}).catch(err=>console.log(err));
-// 	}
-//  }
