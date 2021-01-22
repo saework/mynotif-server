@@ -4,14 +4,44 @@ const JWTStrategy = passportJWT.Strategy
 const ExtractJWT = passportJWT.ExtractJwt
 const config = require('../config.js');
 const jwtTokenKey = config.jwtTokenKey;
+const PersBD = require(`./db-seq`);
+const bcrypt = require( 'bcrypt' );  // хеширование паролей
 
 module.exports = (passport) => {
  
     passport.use(new LocalStrategy((username, password, done) => {
-        console.log('localStrategi');
-        // here should be a look up to the database for username and password and comparison with an accepted username and password
-        user = "test@test"
-        return done(null, user, { message: 'Logged In Successfully' })
+      console.log('<<Проверка пользователя по localStrategi>>');
+      const user = null;
+      if(username && password){
+        PersBD.findOne({
+          attributes:['hash'],
+          where:{
+            email:username
+          }
+        }).then(resHush=>{
+          console.log("<<Получен hash пользователя>>");
+          const dbHash = resHush.hash;
+          if (dbHash !== null) {
+            const passwordHash = bcrypt.hashSync(password, 10 );
+            if (passwordHash===dbHash){
+              console.log('<<Пользователь аутентифицирован>>');
+              user = username;
+              return done(null, user);
+            }else{
+              console.log('<<Не верный пароль пользователя>>');
+              return done(null, false);
+            }
+
+          } else {
+            console.log("<<Не определен hash пользователя>>");
+            return done(null, false); 
+          }
+        }).catch(err=>console.log(err));
+
+      }else{
+        console.log('<<Не определен логин или пароль>>');
+        return done(null, false)
+      }
     }))
 
 //     passport.use(new JWTStrategy({
@@ -40,10 +70,42 @@ module.exports = (passport) => {
 
   let opts = {};
   opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-  opts.secretOrKey = 'jwt_secret_key'; //config.secret;
+  opts.secretOrKey = jwtTokenKey; 
   console.log(opts.jwtFromRequest);
   passport.use(new JWTStrategy(opts, (jwt_payload, done) => {
-    console.log("JWTStrategy")
+    console.log("<<Проверка пользователя по localStrategi>>")
+    console.log(jwt_payload)
+    // const user = null;
+    // if(username && password){
+    //   PersBD.findOne({
+    //     attributes:['hash'],
+    //     where:{
+    //       email:username
+    //     }
+    //   }).then(resHush=>{
+    //     console.log("<<Получен hash пользователя>>");
+    //     if (resHush !== null) {
+    //       const passwordHash = bcrypt.hashSync(password, 10 );
+    //       if (passwordHash===resHush){
+    //         console.log('<<Пользователь аутентифицирован>>');
+    //         user = username;
+    //         return done(null, user);
+    //       }else{
+    //         console.log('<<Не верный пароль пользователя>>');
+    //         return done(null, false);
+    //       }
+
+    //     } else {
+    //       console.log("<<Не определен hash пользователя>>");
+    //       return done(null, false); 
+    //     }
+    //   }).catch(err=>console.log(err));
+
+    // }else{
+    //   console.log('<<Не определен логин или пароль>>');
+    //   return done(null, false)
+    // }
+
 
     // User.findById(jwt_payload.data._id, (err, User) => {
     //   if(err){

@@ -26,7 +26,10 @@ var Router = require('react-router');
 
 var passport = require('passport');
 
-require('./scr/passp-strateg.js')(passport); //const LocalStrategy = require('passport-local').Strategy;
+require('./scr/passp-strateg.js')(passport);
+
+var bcrypt = require('bcrypt'); // хеширование паролей
+//const LocalStrategy = require('passport-local').Strategy;
 //!!! добавить защиту от sql-инъекций для форм !!! ////
 //!!! удалить react, react-router !!!
 //!!! проверка на дубликат пользователя !!!
@@ -35,88 +38,10 @@ require('./scr/passp-strateg.js')(passport); //const LocalStrategy = require('pa
 var TIMEZONE = config.TIMEZONE;
 var timeStopCronTasks = config.timeStopCronTasks;
 var timeStartCronTasks = config.timeStartCronTasks;
-var jwtTokenKey = config.jwtTokenKey; // passport.use('local',new LocalStrategy(
-// 	function(username, password, done) {
-// 		user = "test@test"
-// 		return done(null, user);
-// 	//   User.findOne({ username: username }, function(err, user) {
-// 	// 	if (err) { return done(err); }
-// 	// 	if (!user) {
-// 	// 	  return done(null, false, { message: 'Incorrect username.' });
-// 	// 	}
-// 	// 	if (!user.validPassword(password)) {
-// 	// 	  return done(null, false, { message: 'Incorrect password.' });
-// 	// 	}
-// 	// 	return done(null, user);
-// 	//   });
-// 	}
-//   ));
-//   passport.use('local-my',new LocalStrategy(
-// 	function(username, password, done) {
-// 	  User.findOne({ username: username }, function(err, user) {
-// 		if (err) { return done(err); }
-// 		if (!user) {
-// 		  return done(null, false, { message: 'Incorrect username.' });
-// 		}
-// 		if (!user.validPassword(password)) {
-// 		  return done(null, false, { message: 'Incorrect password.' });
-// 		}
-// 		return done(null, user);
-// 	  });
-// 	}
-//   ));
-// passport.use(new LocalStrategy({
-//     usernameField: 'email',
-//     passwordField: 'password',
-//     passReqToCallback: true,
-//     session: false
-//   },
-//   function(req, username, password, done) {
-// 	  User.findOne({ username: username }, function(err, user) {
-// 		if (err) { return done(err); }
-// 		if (!user) {
-// 		  return done(null, false, { message: 'Incorrect username.' });
-// 		}
-// 		if (!user.validPassword(password)) {
-// 		  return done(null, false, { message: 'Incorrect password.' });
-// 		}
-// 		return done(null, user);
-// 	  });
-// 	}
-//   ));
-//   passport.serializeUser(function(user, cb) {
-// 	cb(null, user.id);
-//   });
-//   passport.deserializeUser(function(id, cb) {
-// 	db.users.findById(id, function (err, user) {
-// 	  if (err) { return cb(err); }
-// 	  cb(null, user);
-// 	});
-//   });
-///!!!//
-
+var jwtTokenKey = config.jwtTokenKey;
 var app = express(); //app.use(express.bodyParser());
 //   app.use(passport.initialize());
 //   app.use(passport.session());
-//!!!
-// passport.use(new LocalStrategy(
-// 	function(username, password, done) {
-// 	  //const user = "test@test";
-// 	  console.log("local!!");
-// 	  //return done(null, user)
-// 	  return done(null, false, { message: 'Incorrect username.' })
-// 	  // User.findOne({ username: username }, function (err, user) {
-// 	  //   if (err) { return done(err); }
-// 	  //   if (!user) {
-// 	  //     return done(null, false, { message: 'Incorrect username.' });
-// 	  //   }
-// 	  //   if (!user.validPassword(password)) {
-// 	  //     return done(null, false, { message: 'Incorrect password.' });
-// 	  //   }
-// 	  //   return done(null, user);
-// 	  // });  //
-// 	}	
-//   ));
 
 app.use(function (req, res, next) {
   ///!!! убрать !!!
@@ -127,58 +52,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(express["static"](__dirname + "/public"));
-app.use(express.json()); //app.use('/load', passport.authenticate('jwt', { session: false }));
-// app.use('/home', 
-//   passport.authenticate('jwt', {session: false}),(err, user, info) => {
-//   //require('./routes/users.js')
-//   console.log("!!!");
-//   response.sendFile(__dirname + "/public/index.html");
-//   }
-//   )
-// app.use((req, res, next) => {
-// 	if(req.headers.authorization){
-// 	  jwt.verify(req.headers.authorization.split(' ')[1], tokenKey, (err, payload) => {
-// 		if(err)
-// 		  next();
-// 		else if(payload){
-// 		  for(let user of users){
-// 			if(user.id === payload.id){
-// 			  req.user = user;
-// 			  next();
-// 			}
-// 		  }
-// 		  if(!req.user) next();
-// 		}
-// 	  });
-// 	}
-// 	next();
-//    });
-///!!!
-//    app.get("/home", function(request,response){
-// 	//app.get("localhost:3001/home", function(request,response){
-// 	let currUserEmail = request.query.currUserEmail;
-// 	//console.log(currUserEmail); 
-// 	if (currUserEmail){
-// 		if (currUserEmail =="test@test"){
-// 			response.redirect('http://localhost:3000/home');
-// 		}else{
-// 			response.redirect('http://localhost:3000/login');
-// 		}
-// 		response.json(res);
-// 	}
-// })
-///!!!!
-//    app.get("/login", function(request,response){
-// 	response.redirect('http://localhost:3000/login');
-// })
-// app.get('*', function (req, res) { // This wildcard method handles all requests
-//     Router.run(routes, req.path, function (Handler, state) {
-//         var element = React.createElement(Handler);
-//         var html = React.renderToString(element);
-//         res.render('main', { content: html });
-//     });
-// });
-//!!! перезагружает страницу при роутинге - не подходит!!!
+app.use(express.json()); //!!! перезагружает страницу при роутинге - не подходит!!!
 // app.get('/*', (request, response) => {
 // 	//response.sendFile(path.join(__dirname, './public/index.html'));
 // 	response.sendFile(__dirname + "/public/index.html");
@@ -187,94 +61,70 @@ app.use(express.json()); //app.use('/load', passport.authenticate('jwt', { sessi
 // 	//response.sendFile(path.join(__dirname, './public/index.html'));
 // 	response.sendFile(__dirname + "/public/index.html");
 // });
-// app.get('/home', (request, response) => {
-// 	//response.sendFile(path.join(__dirname, './public/index.html')); //
-// 	const jwt = request.query.jwt;
-// 	if (jwt){
-// 		response.sendFile(__dirname + "/public/index.html");
-// 	}else{
-// 		response.redirect('/login');
-// 	}
-// 	console.log("!!!ответ от сервера!!");
-// });
-// app.post("/login", function (request, response) {
-// 	//console.log(request);
-// 	if (request.body.loginData){
-// 		const date = request.body.loginData;
-// 		console.log(date)
-// 		// if (date === "startCronTasks" ){
-// 		// 	cronFunc.createParamsCheckAndStartCronTasksForAll();
-// 		// 	//response.redirect('/SignIn');
-// 		// 	//response.redirect('http://localhost:3001/login');//			
-// 		// }
-// 		const jwtData = {
-// 			email:"test@test",
-// 			jwtToken:{jwt:123}
-// 		}
-// 		response.json(jwtData);
-// 		console.log("jwt отправлен!!");
-// 	 }else{
-// 		console.log("нет данных!!");
-// 	 }
-// });
-///!!!
-// app.post('/login',
-//   passport.authenticate('local'),
-//   function(req, res) {
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/users/' + req.user.username);
-//   });
-///!!!
-// app.post('/login', 
-//   passport.authenticate('local', { failureRedirect: '/login' }),
-//   function(req, res) {
-// 	  console.log("!!!")
-//     res.redirect('/home');
-//   });
-// app.post('/login',
-//   passport.authenticate('local'),
-//   function(req, res) {
-// 	  req.user = "test@test"
-// 	  console.log("ok!")
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/home');
-//   }
-//  );
-// app.post("/login", function(request,response){
-// console.log(request.user);
-// })
-//{ failureRedirect: '/login' },
-// const successRedirect =()=>{
-// 	return true
-// }
-// app.post('/login',
-//   passport.authenticate('local',  {session: false}, { successRedirect: '/home',
-//                                    failureRedirect: '/login' })
-// );
-// app.post('/login',
-//   passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/' }),
-//   function (req, res) {
-//     console.log('req user', req.body);
-//     console.log('after auth', req.user);
-//   }
-// );
+
+var createUserAccount = function createUserAccount(currUserEmail, password) {
+  var passwordHash = bcrypt.hashSync(password, 10); // генерируем jwt токен
+
+  var token = jwt.sign({
+    currUserEmail: currUserEmail
+  }, jwtTokenKey);
+  var jwtHash = bcrypt.hashSync(token, 10);
+
+  if (token && jwtHash) {} else {
+    var errMes = "<<Учетная запись не создана. Ошибка генерации hash>>";
+    console.log(errMes);
+    return errMes;
+  }
+}; // Зарегистрироваться
+
+
+app.post("/signup", function (request, response) {
+  var currUserEmail = request.body.params.currUserEmail;
+  var password = request.body.params.password;
+
+  if (currUserEmail && password) {
+    //console.log(currUserEmail);
+    currUserEmail = currUserEmail.replace(/"/g, '');
+    console.log(currUserEmail);
+
+    if (currUserEmail) {
+      PersBD.findOne({
+        attributes: ['hash'],
+        where: {
+          email: currUserEmail
+        }
+      }).then(function (resHush) {
+        console.log("<<получен hash пользователя>>");
+
+        if (resHush === null) {
+          var createUserResult = createUserAccount(currUserEmail, password);
+          response.json({
+            result: createUserResult
+          });
+        } else {
+          var errMes = "<<Учетная запись не создана. Уже существует пользователь с таким email!>>";
+          console.log(errMes);
+          response.json({
+            result: errMes
+          });
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  } else {
+    var errMes = "<<Учетная запись не создана. Не определены email и/или пароль>>";
+    console.log(errMes);
+    response.json({
+      result: errMes
+    });
+  }
+}); // Вход в аккаунт
 
 app.post('/login', function (req, res, next) {
   passport.authenticate('local', {
     session: false
   }, function (err, user, info) {
-    // 	console.log(req.body) 
-    // const loginData = req.body.loginData;
-    // if (_.isEmpty(loginData)) {
-    // 	return res.status(400).json({
-    // 	  message: 'loginData не определен!',
-    // 	  user: user
-    // 	})      
-    //   }
-    //   user = loginData.email;
-    //   console.log('user = ', user);
     if (err || !user) {
       return res.status(400).json({
         message: 'Something is not right',
@@ -287,118 +137,53 @@ app.post('/login', function (req, res, next) {
     }, function (err) {
       if (err) {
         res.send(err);
-      } // generate a signed json web token with the contents of user object and return it in the response
-      //const token = jwt.sign({user}, jwtTokenKey)  //!!
+      } // генерируем jwt токен
 
 
-      var secretOrKey = 'jwt_secret_key';
       var token = jwt.sign({
         user: user
-      }, secretOrKey, {
-        expiresIn: 604800
-      }); // 1 week
-      //const token = jwt.sign(payload, secretOrKey, { expiresIn });
+      }, jwtTokenKey); //!!
+      //const token = jwt.sign({user}, jwtTokenKey,{ expiresIn: 604800})  // 1 week
 
-      console.log(token); //res.redirect('/home');
-      //return  res.json({ user, token })
+      console.log(token); //return  res.json({ user, token })
 
       return res.json({
         token: token
       });
     });
   })(req, res);
-}); //   app.post('/load', passport.authenticate('jwt', { session: false }
-//   , (err, user, info) => {
-// 	if (err)  {
-// 		console.log(err);
-// 	}
-// 	console.log(user);
-// 	return user;
-//   } 
-//   ),
-//     function(req, res) {
-//         res.send("load");
-//     }
-// );
-// app.post("/load", function(request,response){
-// 	console.log(request)
-// 	response.send("!!!");
-//   }
-// );
-
-app.post('/load', passport.authenticate('jwt', {
+});
+app.post("/load", passport.authenticate('jwt', {
   session: false
-}), function (req, res) {
-  res.send("load");
-}); //!!
-// app.post("/load", function(request,response){
-// 	//console.log(request);
-// 	let currUserEmail = request.body.params.currUserEmail;
-// 	//let currUserEmail = request.query.currUserEmail;
-// 	console.log(currUserEmail); 
-// 	if (currUserEmail){
-// 		//console.log(currUserEmail);
-// 		currUserEmail = currUserEmail.replace(/"/g,'');
-// 		console.log(currUserEmail);
-// 		if (currUserEmail){
-// 			PersBD.findAll({
-// 				attributes:['bdData'],
-// 				where:{
-// 					email:currUserEmail
-// 				}
-// 			}).then(res=>{
-// 				console.log("<<получены данные get запроса с параметром>>");
-// 				console.log(res);
-// 				response.json(res);
-// 			}).catch(err=>console.log(err));
-// 		}
-// 	}
-// })
-//!!
-// app.get("/load", function(request,response){
-// 	let currUserEmail = request.query.currUserEmail;
-// 	console.log(currUserEmail); 
-// 	if (currUserEmail){
-// 		//console.log(currUserEmail);
-// 		currUserEmail = currUserEmail.replace(/"/g,'');
-// 		console.log(currUserEmail);
-// 		if (currUserEmail){
-// 			PersBD.findAll({
-// 				attributes:['bdData'],
-// 				where:{
-// 					email:currUserEmail
-// 				}
-// 			}).then(res=>{
-// 				console.log("<<получены данные get запроса с параметром>>");
-// 				console.log(res);
-// 				response.json(res);
-// 			}).catch(err=>console.log(err));
-// 		}
-// 	}
-// })
-// let loadDataFromDBbyEmail=(currUserEmail)=>{
-// 	if (currUserEmail){
-// 		//console.log(currUserEmail);
-// 		currUserEmail = currUserEmail.replace(/"/g,'');
-// 		console.log(currUserEmail);
-// 		if (currUserEmail){
-// 			PersBD.findAll({
-// 				attributes:['bdData'],
-// 				where:{
-// 					email:currUserEmail
-// 				}
-// 			}).then(res=>{
-// 				console.log("<<получены данные get запроса с параметром>>");
-// 				console.log(res);
-// 				response.json(res);
-// 			}).catch(err=>console.log(err));
-// 		}
-// 	}
-// }
-// app.use('/users', 
-//   passport.authenticate('jwt', {session: false}),
-//   require('./routes/users.js'))
+}), function (request, response) {
+  //console.log(request);
+  var currUserEmail = "test@test"; ///!!! убрать!!
+  //let currUserEmail = request.body.params.currUserEmail;
+  //let currUserEmail = request.query.currUserEmail;
 
+  console.log(currUserEmail);
+
+  if (currUserEmail) {
+    //console.log(currUserEmail);
+    currUserEmail = currUserEmail.replace(/"/g, '');
+    console.log(currUserEmail);
+
+    if (currUserEmail) {
+      PersBD.findAll({
+        attributes: ['bdData'],
+        where: {
+          email: currUserEmail
+        }
+      }).then(function (res) {
+        console.log("<<получены данные get запроса с параметром>>");
+        console.log(res);
+        response.json(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }
+});
 app.post("/home", //passport.authenticate('jwt', {session: false}),
 function (request, response) {
   if (request.body.data) {

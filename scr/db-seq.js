@@ -29,6 +29,10 @@ PersBD.init({
 	hash:{
 		type: Sequelize.STRING,
 		allowNull: true
+	},
+	jwtHash:{
+		type: Sequelize.STRING,
+		allowNull: true
 	}
 },{
 	sequelize,

@@ -187,15 +187,17 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 		res.forEach(row => {
 			//const bdDataString = row[0].dataValues.bdData;
 			const bdDataString = row.dataValues.bdData;
-			//const bdRows = JSON.parse(bdDataString).bdRows;
-			const bdData = JSON.parse(bdDataString);
-			console.log(bdData);
-			const bdRows = bdData.bdRows;
-			console.log(bdRows);
-			const email = row.dataValues.email;
-			//console.log(bdData);
-			// createCronTaskParamObjs(cronTaskParamsArr, bdRows, email)
-			createCronTaskParamObjs(cronTaskParamsArr, bdRows, email);
+			if (bdDataString){
+				//const bdRows = JSON.parse(bdDataString).bdRows;
+				const bdData = JSON.parse(bdDataString);
+				console.log(bdData);
+				const bdRows = bdData.bdRows;
+				console.log(bdRows);
+				const email = row.dataValues.email;
+				//console.log(bdData);
+				// createCronTaskParamObjs(cronTaskParamsArr, bdRows, email)  
+				createCronTaskParamObjs(cronTaskParamsArr, bdRows, email);
+			}
 		});
 	}
 	console.log("<<cronTaskParamsArr сформирован>>");
