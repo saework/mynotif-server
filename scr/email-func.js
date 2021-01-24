@@ -21,7 +21,7 @@ let sendEmail = async (emailAddress, emailCapt, emailText)=>{
 		html: emailText 
 	});
 	const now = new Date();
-	console.log(`Email - sent - ${emailInfo.messageId} - ${emailAddress} - ${emailCapt} - ${text} - ${now}`);
+	console.log(`Email - sent - ${emailInfo.messageId} - ${emailAddress} - ${emailCapt} - ${emailText} - ${now}`);
 	//console.log("Email sent: %s", info.messageId);
  }
 

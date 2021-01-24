@@ -11,7 +11,7 @@ module.exports = (passport) => {
  
     passport.use(new LocalStrategy((username, password, done) => {
       console.log('<<Проверка пользователя по localStrategi>>');
-      const user = null;
+      let user = null;
       if(username && password){
         PersBD.findOne({
           attributes:['hash'],
@@ -22,8 +22,8 @@ module.exports = (passport) => {
           console.log("<<Получен hash пользователя>>");
           const dbHash = resHush.hash;
           if (dbHash !== null) {
-            const passwordHash = bcrypt.hashSync(password, 10 );
-            if (passwordHash===dbHash){
+            const resPass = bcrypt.compareSync(password, dbHash);
+            if (resPass){
               console.log('<<Пользователь аутентифицирован>>');
               user = username;
               return done(null, user);
@@ -31,6 +31,16 @@ module.exports = (passport) => {
               console.log('<<Не верный пароль пользователя>>');
               return done(null, false);
             }
+            // const passwordHash = bcrypt.hashSync(password, 10 );
+            // if (passwordHash===dbHash){
+            //   console.log('<<Пользователь аутентифицирован>>');
+            //   user = username;
+            //   return done(null, user);
+            // }else{
+            //   console.log('<<Не верный пароль пользователя>>');
+            //   return done(null, false);
+            // }
+
 
           } else {
             console.log("<<Не определен hash пользователя>>");

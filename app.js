@@ -73,12 +73,12 @@ let generatePassword=()=> {
 }
 
 // Сбросить пароль
-app.post("/newpassword", passport.authenticate('jwt', { session: false }),  function(request, response){
-	const currUserEmail = request.body.params.currUserEmail;
+app.post("/newpassword",  function(request, response){
+	const currUserEmail = request.body.data.currUserEmail;
 
 	if (currUserEmail){
 		const newPassword = generatePassword();
-		const passwordHash = bcrypt.hashSync(password, 10 );
+		const passwordHash = bcrypt.hashSync(newPassword, 10 );
 		if (passwordHash){
 			console.log(`<< изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail} >>`);
 			PersBD.update({hash: passwordHash}, {
@@ -90,9 +90,9 @@ app.post("/newpassword", passport.authenticate('jwt', { session: false }),  func
 					const emailCapt = `Сервис mynotif.ru - пароль сброшен`;
 					const emailText = `<b>Новый пароль:</b><b>${newPassword}</b>`;
 					emailFunc.sendEmail(currUserEmail, emailCapt, emailText)
-					const mes = "<< Пароль успешно обновлен. Новый пароль отправлен на электронную почту>>"
+					const mes = "Новый пароль отправлен на Ваш Email"
 					console.log(mes);
-					response.json({result: mes});
+					response.json({result: "ok",mes: mes});
 				}
 			}).catch(err=>console.log(err));
 		}else{
@@ -184,52 +184,54 @@ app.post("/signup",  function(request, response){
 
 
 // Вход в аккаунт
-app.post('/login', (req, res, next) => {
+app.post('/login', (request, response, next) => {
 	passport.authenticate('local',  {session: false}, (err, user, info) => {
 		   
 	  if (err || !user) {
-		return res.status(400).json({
-		  message: 'Something is not right',
-		  user: user
+		return response.status(401).json({
+		  result: 'Не верный логин или пароль!',
+		  err: err
 		})      
 	  }
-	  req.login(user, {session: false}, (err) => {
+	  request.login(user, {session: false}, (err) => {
 		if (err) {
-		  res.send(err)
+			response.send(err)
 		}
    
 		// генерируем jwt токен
-		const token = jwt.sign({user}, jwtTokenKey)  //!!
+		const jwtToken = jwt.sign({user}, jwtTokenKey)  //!!
 		//const token = jwt.sign({user}, jwtTokenKey,{ expiresIn: 604800})  // 1 week
-		console.log(token)
+		console.log(jwtToken)
 		//return  res.json({ user, token })
 		const jwtHash = bcrypt.hashSync(jwtToken, 10 );
 		if (jwtHash){
 			PersBD.update({jwtHash: jwtHash}, {
 				where: {
-				email: currUserEmail
+				email: user
 				}
 			}).then((res) => {
 				if (res[0] === 1){
 					const mes = "<< JWT записан в БД >>"
 					console.log(mes);
-					return  res.json({token})
+					response.json({jwtToken});
+					return  jwtToken;
 				}
 			}).catch(err=>console.log(err));
 		}else{
 			const mes = "<< Не определен jwtHash. Вход в систему отклонен >>"
 			console.log(mes);
-			return  res.json(mes)
+			return  response.json(mes)
 		}
-		//return  res.json({token})
+		//return  res.json({jwtToken})
 	  })
-	})(req, res)
+	})(request, response)
   })
 
 app.post("/load", passport.authenticate('jwt', { session: false }), function(request,response){
 	//console.log(request);
-	let currUserEmail = "test@test"  ///!!! убрать!!
-	//let currUserEmail = request.body.params.currUserEmail;
+	//let currUserEmail = "test@test"  ///!!! убрать!!
+	console.log(request.body)
+	let currUserEmail = request.body.data.currUserEmail;
 	//let currUserEmail = request.query.currUserEmail;
 	console.log(currUserEmail); 
 	if (currUserEmail){
@@ -270,9 +272,9 @@ app.post("/home",
 		const bdRows = JSON.stringify(request.body.data.bdRows);
 		const bdRowsArr = request.body.data.bdRows.bdRows;
 		let currUserEmail = JSON.stringify(request.body.data.currUserEmail);	
+		currUserEmail = currUserEmail.replace(/"/g,'');
 		//console.log(currUserEmail);
-		if (currUserEmail){	
-			currUserEmail = currUserEmail.replace(/"/g,'');
+		if (currUserEmail){		
 			PersBD.findAll({
 				where:{
 					email:currUserEmail
@@ -287,6 +289,7 @@ app.post("/home",
 						}
 					}).then((res) => {
 						if (res[0] === 1){
+							response.send("<<данные таблицы обновлены>>");
 							console.log("<< запуск функции updateAndStartCronTasks >>");
 							cronFunc.updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
 						}
@@ -305,8 +308,12 @@ app.post("/home",
 				// 		}
 				// 	}).catch(err=>console.log(err));
 				 }
-				response.send("<<данные таблицы обновлены>>");
+				//response.send("<<данные таблицы обновлены>>");
 			}).catch(err=>console.log(err));
+		}else{
+			const mes = "Не определен Email!"
+			console.log(mes);
+			response.status(401).send({result: mes});
 		}
 	//	}
 	 }
