@@ -10,7 +10,7 @@ const bcrypt = require( 'bcrypt' );  // хеширование паролей
 module.exports = (passport) => {
  
     passport.use(new LocalStrategy((username, password, done) => {
-      console.log('<<Проверка пользователя по localStrategi>>');
+      console.log('<<Проверка пользователя по LocalStrategy>>');
       let user = null;
       if(username && password){
         PersBD.findOne({
@@ -19,31 +19,25 @@ module.exports = (passport) => {
             email:username
           }
         }).then(resHush=>{
-          console.log("<<Получен hash пользователя>>");
-          const dbHash = resHush.hash;
-          if (dbHash !== null) {
-            const resPass = bcrypt.compareSync(password, dbHash);
-            if (resPass){
-              console.log('<<Пользователь аутентифицирован>>');
-              user = username;
-              return done(null, user);
-            }else{
-              console.log('<<Не верный пароль пользователя>>');
-              return done(null, false);
+          if (resHush){
+            console.log("<< Получен hash пользователя >>");  
+            const dbHash = resHush.hash;
+            if (dbHash !== null) {
+              const resPass = bcrypt.compareSync(password, dbHash);
+              if (resPass){
+                console.log('<< Пользователь аутентифицирован >>');
+                user = username;
+                return done(null, user);
+              }else{
+                console.log('<< Не верный пароль пользователя >>');
+                return done(null, false);
+              }
+            } else {
+              console.log("<< Не определен hash пользователя >>");
+              return done(null, false); 
             }
-            // const passwordHash = bcrypt.hashSync(password, 10 );
-            // if (passwordHash===dbHash){
-            //   console.log('<<Пользователь аутентифицирован>>');
-            //   user = username;
-            //   return done(null, user);
-            // }else{
-            //   console.log('<<Не верный пароль пользователя>>');
-            //   return done(null, false);
-            // }
-
-
-          } else {
-            console.log("<<Не определен hash пользователя>>");
+          }else{
+            console.log("<< Пользователь отсутствует в системе >>");
             return done(null, false); 
           }
         }).catch(err=>console.log(err));
@@ -83,8 +77,46 @@ module.exports = (passport) => {
   opts.secretOrKey = jwtTokenKey; 
   console.log(opts.jwtFromRequest);
   passport.use(new JWTStrategy(opts, (jwt_payload, done) => {
-    console.log("<<Проверка пользователя по localStrategi>>")
+    console.log("<< Проверка пользователя по JWTStrategy >>")
     console.log(jwt_payload)
+    let user = null;
+    if (jwt_payload){
+      const username = jwt_payload.user;
+      if (username){
+        PersBD.findOne({
+          attributes:['jwtHash'],
+          where:{
+            email:username
+          }
+        }).then(resJwtHush=>{
+          if (resJwtHush){
+            console.log("<< Получен jwtHash пользователя >>");  
+            const dbJwtHash = resJwtHush.jwtHash;
+            if (dbJwtHash !== null) {
+              user = username;
+              return done(null, user);
+            } else {
+              console.log("<< Не определен jwtHash пользователя >>");
+              return done(null, false); 
+            }
+          }else{
+            console.log("<< JWt пользователя отсутствует в системе >>");
+            return done(null, false); 
+          }
+        //}).catch(err=>console.log(err));
+        }).catch((err)=>{
+          console.log(err)
+          return done(err);
+        });
+      }else{
+        console.log('<< username не определен >>');
+        return done(null, false)
+      }
+    }else{
+      console.log('<< jwt_payload не определен>>');
+      return done(null, false)
+    }
+
     // const user = null;
     // if(username && password){
     //   PersBD.findOne({
@@ -129,8 +161,8 @@ module.exports = (passport) => {
     //   }
     // });
 
-    console.log(user)
-    User = "test@test"
-    return done(null, User);
+    // console.log(user)
+    // User = "test@test"
+    // return done(null, User);
   }));
 }

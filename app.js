@@ -17,6 +17,8 @@ require('./scr/passp-strateg.js')(passport);
 const bcrypt = require( 'bcrypt' );  // хеширование паролей
 const emailFunc = require('./scr/email-func');
 
+const log4js = require("log4js");
+
 //const LocalStrategy = require('passport-local').Strategy;
 
 
@@ -28,6 +30,52 @@ const TIMEZONE = config.TIMEZONE;
 const timeStopCronTasks = config.timeStopCronTasks;
 const timeStartCronTasks = config.timeStartCronTasks;
 const jwtTokenKey = config.jwtTokenKey;
+const prod = config.prod;
+
+// log4js.configure({
+// 	//appenders: { console: { type: 'console' }, file: { type: 'file', filename: 'logs/bot_'+process.argv[2]+'.log' } },
+// 	appenders: { 
+// 		console: { type: 'console'}, 
+// 		file: { type: 'file', filename: 'logs/mynotif.log' } },
+// 	categories: { default: { appenders: ['console', 'file'], level: 'info' } }
+//   });
+
+if (prod){
+  log4js.configure({
+	//appenders: { console: { type: 'console' }, file: { type: 'file', filename: 'logs/bot_'+process.argv[2]+'.log' } },
+	appenders: { 
+		console: { type: 'console'}, 
+		file: { type: 'file', filename: 'logs/mynotif.log' } },
+	categories: { default: { appenders: ['console', 'file'], level: 'info' } }
+	});
+}else{
+  log4js.configure({
+	appenders: {
+	  out: {
+		type: 'stdout',
+		layout: {
+		  //type: 'pattern', pattern: '%d %p %c %f:%l %m%n'
+		  type: 'pattern', pattern: '%d %p  %f:%l - %m%n'
+		}
+	  }
+	},
+	categories: {
+	  default: { appenders: ['out'], level: 'info', enableCallStack: true }
+	}
+  });
+}
+
+const logger = log4js.getLogger("mynotif");
+logger.trace("Entering cheese testing");
+logger.debug("Got cheese.");
+logger.info("Cheese is Comté.");
+logger.warn("Cheese is quite smelly.");
+logger.error("Cheese is too ripe!");
+logger.fatal("Cheese was breeding ground for listeria.");
+///
+
+
+
 
 
   const app = express();
@@ -80,7 +128,8 @@ app.post("/newpassword",  function(request, response){
 		const newPassword = generatePassword();
 		const passwordHash = bcrypt.hashSync(newPassword, 10 );
 		if (passwordHash){
-			console.log(`<< изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail} >>`);
+			//console.log(`<< изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail} >>`);
+			logger.info(`Изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail}`);
 			PersBD.update({hash: passwordHash}, {
 				where: {
 				email: currUserEmail
@@ -91,7 +140,8 @@ app.post("/newpassword",  function(request, response){
 					const emailText = `<b>Новый пароль:</b><b>${newPassword}</b>`;
 					emailFunc.sendEmail(currUserEmail, emailCapt, emailText)
 					const mes = "Новый пароль отправлен на Ваш Email"
-					console.log(mes);
+					//console.log(mes);
+					logger.info(mes);
 					response.json({result: "ok",mes: mes});
 				}
 			}).catch(err=>console.log(err));
@@ -228,13 +278,16 @@ app.post('/login', (request, response, next) => {
   })
 
 app.post("/load", passport.authenticate('jwt', { session: false }), function(request,response){
+//	app.post("/load", function(request,response){
 	//console.log(request);
 	//let currUserEmail = "test@test"  ///!!! убрать!!
 	console.log(request.body)
-	let currUserEmail = request.body.data.currUserEmail;
+	console.log(request.headers)
+	console.log(request.data)
+	let currUserEmail = request.body.currUserEmail;
 	//let currUserEmail = request.query.currUserEmail;
-	console.log(currUserEmail); 
-	if (currUserEmail){
+	//console.log(currUserEmail); 
+	//if (currUserEmail){
 		//console.log(currUserEmail);
 		currUserEmail = currUserEmail.replace(/"/g,'');
 		console.log(currUserEmail);
@@ -248,9 +301,16 @@ app.post("/load", passport.authenticate('jwt', { session: false }), function(req
 				console.log("<<получены данные get запроса с параметром>>");
 				console.log(res);
 				response.json(res);
-			}).catch(err=>console.log(err));
+			}).catch((err)=>{
+				console.log(err)
+				response.json({result: "Ошибка сервера"});
+			});
+		}else{
+			const mes = "Не определен Email!"
+			console.log(mes);
+			response.json({result: mes});
 		}
-	}
+	//}
 })
 
 app.post("/home",
@@ -282,19 +342,29 @@ app.post("/home",
 			}).then(res=>{
 				console.log(res)
 				if (res.length>0){
-					console.log(`<< изменение записи в базе (изменены задачи пользователя: ${currUserEmail} >>`);
+					console.log(`<< Изменение записи в базе (изменены задачи пользователя: ${currUserEmail} >>`);
 					PersBD.update({ bdData: bdRows }, {
 						where: {
 						email: currUserEmail
 						}
 					}).then((res) => {
 						if (res[0] === 1){
-							response.send("<<данные таблицы обновлены>>");
-							console.log("<< запуск функции updateAndStartCronTasks >>");
+							//response.send("<< данные таблицы обновлены >>");
+							const mes = "Данные таблицы обновлены";
+							response.json({result: "ok", mes: mes});
+							console.log("<< Запуск функции updateAndStartCronTasks >>");
 							cronFunc.updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
+						}else{
+							response.json({result: "ok", mes: "обновление таблицы не требуется"});
+							console.log("<< Запуск функции updateAndStartCronTasks >>");
 						}
-					}).catch(err=>console.log(err));
-				// }else{
+					//}).catch(err=>console.log(err));
+					}).catch((err)=>{
+						console.log(err)
+						response.json({result: "Ошибка сервера"});
+					});
+				
+					// }else{
 				// 	console.log(`<< добавление записи в базу (добавлен новый пользователь и его задачи: ${currUserEmail} >>`);
 				// 	PersBD.create({
 				// 		email: currUserEmail,
@@ -309,7 +379,11 @@ app.post("/home",
 				// 	}).catch(err=>console.log(err));
 				 }
 				//response.send("<<данные таблицы обновлены>>");
-			}).catch(err=>console.log(err));
+			//}).catch(err=>console.log(err));
+		}).catch((err)=>{
+			console.log(err)
+			response.json({result: "Ошибка сервера"});
+		});
 		}else{
 			const mes = "Не определен Email!"
 			console.log(mes);
