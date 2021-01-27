@@ -46,3 +46,834 @@
 [2021-01-26T21:55:19.876] [WARN] mynotif - Cheese is quite smelly.
 [2021-01-26T21:55:19.876] [ERROR] mynotif - Cheese is too ripe!
 [2021-01-26T21:55:19.877] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T21:55:50.859] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T21:55:50.861] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T21:55:50.861] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T21:55:50.862] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:01:43.035] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:01:43.036] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:01:43.037] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:01:43.037] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:01:43.041] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:06:32.937] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:06:32.938] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:06:32.939] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:06:32.940] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:06:32.944] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:07:38.460] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:07:38.462] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:07:38.463] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:07:38.464] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:07:38.468] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:08:25.128] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:08:25.130] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:08:25.131] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:08:25.132] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:08:25.138] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:10:11.178] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:10:11.180] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:10:11.180] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:10:11.181] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:10:11.187] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:11:37.487] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:11:37.488] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:11:37.489] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:11:37.490] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:11:37.494] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:13:39.189] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:13:39.192] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:13:39.193] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:13:39.193] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:13:39.199] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:14:53.867] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:14:53.868] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:14:53.869] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:14:53.870] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:14:53.874] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:14:53.928] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-26T22:14:53.929] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-26T22:14:53.932] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-26T22:14:53.933] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-26T22:14:53.934] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-26T22:14:53.934] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-26T22:14:53.935] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-26T22:14:53.936] [INFO] mynotif - {}
+[2021-01-26T22:26:58.557] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:26:58.559] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:26:58.560] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:26:58.561] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:26:58.577] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:26:58.659] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-26T22:26:58.660] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-26T22:26:58.663] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-26T22:26:58.665] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-26T22:26:58.666] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-26T22:26:58.667] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-26T22:26:58.668] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-26T22:26:58.669] [INFO] mynotif - {}
+[2021-01-26T22:51:09.486] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:51:09.488] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:51:09.489] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:51:09.490] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:51:09.507] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:51:09.568] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-26T22:51:09.568] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-26T22:51:09.570] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-26T22:51:09.571] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-26T22:51:09.573] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-26T22:51:09.574] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-26T22:51:09.574] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-26T22:51:09.575] [INFO] mynotif - {}
+[2021-01-26T22:51:29.954] [INFO] mynotif - Cheese is Comté.
+[2021-01-26T22:51:29.956] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-26T22:51:29.956] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-26T22:51:29.957] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-26T22:51:29.962] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-26T22:51:30.027] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-26T22:51:30.028] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-26T22:51:30.030] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-26T22:51:30.031] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-26T22:51:30.032] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-26T22:51:30.033] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-26T22:51:30.033] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-26T22:51:30.034] [INFO] mynotif - {}
+[2021-01-27T20:03:45.223] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T20:03:45.225] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T20:03:45.226] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T20:03:45.226] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T20:03:45.231] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T20:03:45.507] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T20:03:45.508] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T20:03:45.512] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T20:03:45.513] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T20:03:45.514] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T20:03:45.515] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T20:03:45.516] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T20:03:45.517] [INFO] mynotif - {}
+[2021-01-27T21:48:53.368] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:48:53.370] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:48:53.371] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:48:53.372] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:48:53.377] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:48:53.457] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:48:53.458] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:48:53.460] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:48:53.461] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:48:53.462] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:48:53.462] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:48:53.463] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:48:53.463] [INFO] mynotif - {}
+[2021-01-27T21:50:54.550] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:50:54.551] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:50:54.552] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:50:54.553] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:50:54.558] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:50:54.616] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:50:54.617] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:50:54.619] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:50:54.620] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:50:54.622] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:50:54.623] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:50:54.624] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:50:54.625] [INFO] mynotif - {}
+[2021-01-27T21:51:52.294] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:51:52.296] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:51:52.297] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:51:52.298] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:51:52.305] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:51:52.364] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:51:52.364] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:51:52.366] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:51:52.367] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:51:52.368] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:51:52.369] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:51:52.370] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:51:52.370] [INFO] mynotif - {}
+[2021-01-27T21:51:54.848] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:51:54.850] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:51:54.851] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:51:54.851] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:51:54.857] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:51:54.915] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:51:54.916] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:51:54.918] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:51:54.919] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:51:54.921] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:51:54.921] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:51:54.922] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:51:54.923] [INFO] mynotif - {}
+[2021-01-27T21:52:48.242] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:52:48.244] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:52:48.244] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:52:48.245] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:52:48.250] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:52:48.317] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:52:48.317] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:52:48.319] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:52:48.320] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:52:48.321] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:52:48.322] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:52:48.322] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:52:48.323] [INFO] mynotif - {}
+[2021-01-27T21:53:44.832] [INFO] mynotif - Cheese is Comté.
+[2021-01-27T21:53:44.834] [WARN] mynotif - Cheese is quite smelly.
+[2021-01-27T21:53:44.835] [ERROR] mynotif - Cheese is too ripe!
+[2021-01-27T21:53:44.836] [FATAL] mynotif - Cheese was breeding ground for listeria.
+[2021-01-27T21:53:44.843] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:53:44.909] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:53:44.909] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:53:44.911] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:53:44.912] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:53:44.913] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:53:44.914] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:53:44.914] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:53:44.915] [INFO] mynotif - {}

@@ -5,19 +5,20 @@ const _ = require('lodash');
 const bodyParser = require("body-parser");
 //const app = express();
 const config = require('./config.js');
-const cronFunc = require(`./scr/cron-func`);
-const cronTasks = require(`./scr/cron-tasks`);
-const PersBD = require(`./scr/db-seq`);
+const cronFunc = require(`./scr/cron/cron-func`);
+const cronTasks = require(`./scr/cron/cron-tasks`);
+const PersBD = require(`./scr/db/db-seq`);
 const jwt = require('jsonwebtoken');
 const React = require('react');
 const Router = require('react-router');
 const passport = require('passport');
-require('./scr/passp-strateg.js')(passport);
+require('./scr/services/passp-strateg.js')(passport);
 
 const bcrypt = require( 'bcrypt' );  // хеширование паролей
-const emailFunc = require('./scr/email-func');
+const emailFunc = require('./scr/services/email-func');
+const logger = require('./scr/services/logger-config');
 
-const log4js = require("log4js");
+//const log4js = require("log4js");
 
 //const LocalStrategy = require('passport-local').Strategy;
 
@@ -30,51 +31,42 @@ const TIMEZONE = config.TIMEZONE;
 const timeStopCronTasks = config.timeStopCronTasks;
 const timeStartCronTasks = config.timeStartCronTasks;
 const jwtTokenKey = config.jwtTokenKey;
-const prod = config.prod;
+// const prod = config.prod;
 
-// log4js.configure({
+// if (prod){
+//   log4js.configure({
 // 	//appenders: { console: { type: 'console' }, file: { type: 'file', filename: 'logs/bot_'+process.argv[2]+'.log' } },
 // 	appenders: { 
 // 		console: { type: 'console'}, 
 // 		file: { type: 'file', filename: 'logs/mynotif.log' } },
 // 	categories: { default: { appenders: ['console', 'file'], level: 'info' } }
+// 	});
+// }else{
+//   log4js.configure({
+// 	appenders: {
+// 	  out: {
+// 		type: 'stdout',
+// 		layout: {
+// 		  //type: 'pattern', pattern: '%d %p %c %f:%l %m%n'
+// 		  type: 'pattern', pattern: '%d %p  %f:%l - %m%n'
+// 		}
+// 	  }
+// 	},
+// 	categories: {
+// 	  default: { appenders: ['out'], level: 'info', enableCallStack: true }
+// 	}
 //   });
+// }
 
-if (prod){
-  log4js.configure({
-	//appenders: { console: { type: 'console' }, file: { type: 'file', filename: 'logs/bot_'+process.argv[2]+'.log' } },
-	appenders: { 
-		console: { type: 'console'}, 
-		file: { type: 'file', filename: 'logs/mynotif.log' } },
-	categories: { default: { appenders: ['console', 'file'], level: 'info' } }
-	});
-}else{
-  log4js.configure({
-	appenders: {
-	  out: {
-		type: 'stdout',
-		layout: {
-		  //type: 'pattern', pattern: '%d %p %c %f:%l %m%n'
-		  type: 'pattern', pattern: '%d %p  %f:%l - %m%n'
-		}
-	  }
-	},
-	categories: {
-	  default: { appenders: ['out'], level: 'info', enableCallStack: true }
-	}
-  });
-}
-
-const logger = log4js.getLogger("mynotif");
+//const logger = log4js.getLogger("mynotif");
 logger.trace("Entering cheese testing");
 logger.debug("Got cheese.");
 logger.info("Cheese is Comté.");
 logger.warn("Cheese is quite smelly.");
 logger.error("Cheese is too ripe!");
 logger.fatal("Cheese was breeding ground for listeria.");
-///
-
-
+//console.log(process.env)
+console.log(process.argv)
 
 
 
@@ -110,15 +102,15 @@ app.use(express.json());
 // 	response.sendFile(__dirname + "/public/index.html");
 // });
 
-let generatePassword=()=> {
-    var length = 8,
-        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-        retVal = "";
-    for (var i = 0, n = charset.length; i < length; ++i) {
-        retVal += charset.charAt(Math.floor(Math.random() * n));
-    }
-    return retVal;
-}
+// let generatePassword=()=> {
+//     var length = 8,
+//         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+//         retVal = "";
+//     for (var i = 0, n = charset.length; i < length; ++i) {
+//         retVal += charset.charAt(Math.floor(Math.random() * n));
+//     }
+//     return retVal;
+// }
 
 // Сбросить пароль
 app.post("/newpassword",  function(request, response){
@@ -128,7 +120,7 @@ app.post("/newpassword",  function(request, response){
 		const newPassword = generatePassword();
 		const passwordHash = bcrypt.hashSync(newPassword, 10 );
 		if (passwordHash){
-			//console.log(`<< изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail} >>`);
+			//logger.info(`<< изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail} >>`);
 			logger.info(`Изменение записи в базе (изменен hash пароля пользователя: ${currUserEmail}`);
 			PersBD.update({hash: passwordHash}, {
 				where: {
@@ -140,52 +132,52 @@ app.post("/newpassword",  function(request, response){
 					const emailText = `<b>Новый пароль:</b><b>${newPassword}</b>`;
 					emailFunc.sendEmail(currUserEmail, emailCapt, emailText)
 					const mes = "Новый пароль отправлен на Ваш Email"
-					//console.log(mes);
+					//logger.info(mes);
 					logger.info(mes);
 					response.json({result: "ok",mes: mes});
 				}
-			}).catch(err=>console.log(err));
+			}).catch(err=>logger.info(err));
 		}else{
 			const errMes = "<< Пароль не обновлен. Не определен hash нового пароля >>"
-			console.log(errMes);
+			logger.info(errMes);
 			response.json({result: errMes});
 		}
 	}else{
 		const errMes = "<< Пароль не обновлен. Не определен email >>"
-		console.log(errMes);
+		logger.info(errMes);
 		response.json({result: errMes});
 	}
 })
 
 
-let createUserAccount=(currUserEmail, password, response)=>{
-	const passwordHash = bcrypt.hashSync( password, 10 );
+// let createUserAccount=(currUserEmail, password, response)=>{
+// 	const passwordHash = bcrypt.hashSync( password, 10 );
 
-	// генерируем jwt токен
-	const jwtToken = jwt.sign({currUserEmail}, jwtTokenKey);
-	const jwtHash = bcrypt.hashSync(jwtToken, 10 );
-	if (jwtToken && jwtHash){
-		PersBD.create({
-			email: currUserEmail,
-			bdData: "",
-			hash: passwordHash,
-			jwtHash: jwtHash
-		}).then(resCreateUser=>{
-			//console.log(res);
-			if (!_.isEmpty(resCreateUser)){
-				console.log("<<Учетная запись создана>>");
-				const resCr = {result: "jwt", jwt: jwtToken}
-				console.log(resCr);
-				response.json(resCr);
-				return resCr
-			}
-		}).catch(err=>console.log(err));
-	}else{
-		const errMes = "<<Учетная запись не создана. Ошибка генерации hash>>"
-		console.log(errMes);
-		return {result: errMes}
-	}
-}
+// 	// генерируем jwt токен
+// 	const jwtToken = jwt.sign({currUserEmail}, jwtTokenKey);
+// 	const jwtHash = bcrypt.hashSync(jwtToken, 10 );
+// 	if (jwtToken && jwtHash){
+// 		PersBD.create({
+// 			email: currUserEmail,
+// 			bdData: "",
+// 			hash: passwordHash,
+// 			jwtHash: jwtHash
+// 		}).then(resCreateUser=>{
+// 			//logger.info(res);
+// 			if (!_.isEmpty(resCreateUser)){
+// 				logger.info("<<Учетная запись создана>>");
+// 				const resCr = {result: "jwt", jwt: jwtToken}
+// 				logger.info(resCr);
+// 				response.json(resCr);
+// 				return resCr
+// 			}
+// 		}).catch(err=>logger.info(err));
+// 	}else{
+// 		const errMes = "<<Учетная запись не создана. Ошибка генерации hash>>"
+// 		logger.info(errMes);
+// 		return {result: errMes}
+// 	}
+// }
 
 // Зарегистрироваться
 app.post("/signup",  function(request, response){
@@ -193,9 +185,9 @@ app.post("/signup",  function(request, response){
 	let currUserEmail = request.body.username;
 	let password = request.body.password; 
 	if (currUserEmail && password){
-		//console.log(currUserEmail);
+		//logger.info(currUserEmail);
 		currUserEmail = currUserEmail.replace(/"/g,'');
-		console.log(currUserEmail);
+		logger.info(currUserEmail);
 		if (currUserEmail){
 			PersBD.findOne({
 				attributes:['hash'],
@@ -203,14 +195,14 @@ app.post("/signup",  function(request, response){
 					email:currUserEmail
 				}
 			}).then(resHush=>{
-				console.log("<<Получен hash пользователя>>");
+				logger.info("<<Получен hash пользователя>>");
 				if (resHush === null) {
 					const createUserResult = createUserAccount(currUserEmail, password, response);
-					//console.log(createUserResult);
+					//logger.info(createUserResult);
 					//response.json(createUserResult);
 				} else {
 					const errMes = "Уже существует пользователь с таким email!"
-					console.log(errMes);
+					logger.info(errMes);
 					response.json({result: errMes});
 				}
 
@@ -220,14 +212,14 @@ app.post("/signup",  function(request, response){
 				// 	response.json(createUserResult);
 				// } else {
 				// 	const errMes = "<<Учетная запись не создана. Уже существует пользователь с таким email!>>"
-				// 	console.log(errMes);
+				// 	logger.info(errMes);
 				// 	response.json({result: errMes});
 				// }
-			}).catch(err=>console.log(err));
+			}).catch(err=>logger.info(err));
 		}
 	}else{
 		const errMes = "Учетная запись не создана. Не определены email и/или пароль"
-		console.log(errMes);
+		logger.info(errMes);
 		response.json({result: errMes});
 	}
 })
@@ -251,7 +243,7 @@ app.post('/login', (request, response, next) => {
 		// генерируем jwt токен
 		const jwtToken = jwt.sign({user}, jwtTokenKey)  //!!
 		//const token = jwt.sign({user}, jwtTokenKey,{ expiresIn: 604800})  // 1 week
-		console.log(jwtToken)
+		logger.info(jwtToken)
 		//return  res.json({ user, token })
 		const jwtHash = bcrypt.hashSync(jwtToken, 10 );
 		if (jwtHash){
@@ -262,14 +254,14 @@ app.post('/login', (request, response, next) => {
 			}).then((res) => {
 				if (res[0] === 1){
 					const mes = "<< JWT записан в БД >>"
-					console.log(mes);
+					logger.info(mes);
 					response.json({jwtToken});
 					return  jwtToken;
 				}
-			}).catch(err=>console.log(err));
+			}).catch(err=>logger.info(err));
 		}else{
 			const mes = "<< Не определен jwtHash. Вход в систему отклонен >>"
-			console.log(mes);
+			logger.info(mes);
 			return  response.json(mes)
 		}
 		//return  res.json({jwtToken})
@@ -279,18 +271,18 @@ app.post('/login', (request, response, next) => {
 
 app.post("/load", passport.authenticate('jwt', { session: false }), function(request,response){
 //	app.post("/load", function(request,response){
-	//console.log(request);
+	//logger.info(request);
 	//let currUserEmail = "test@test"  ///!!! убрать!!
-	console.log(request.body)
-	console.log(request.headers)
-	console.log(request.data)
+	logger.info(request.body)
+	logger.info(request.headers)
+	logger.info(request.data)
 	let currUserEmail = request.body.currUserEmail;
 	//let currUserEmail = request.query.currUserEmail;
-	//console.log(currUserEmail); 
+	//logger.info(currUserEmail); 
 	//if (currUserEmail){
-		//console.log(currUserEmail);
+		//logger.info(currUserEmail);
 		currUserEmail = currUserEmail.replace(/"/g,'');
-		console.log(currUserEmail);
+		logger.info(currUserEmail);
 		if (currUserEmail){
 			PersBD.findAll({
 				attributes:['bdData'],
@@ -298,16 +290,16 @@ app.post("/load", passport.authenticate('jwt', { session: false }), function(req
 					email:currUserEmail
 				}
 			}).then(res=>{
-				console.log("<<получены данные get запроса с параметром>>");
-				console.log(res);
+				logger.info("<<получены данные get запроса с параметром>>");
+				logger.info(res);
 				response.json(res);
 			}).catch((err)=>{
-				console.log(err)
+				logger.info(err)
 				response.json({result: "Ошибка сервера"});
 			});
 		}else{
 			const mes = "Не определен Email!"
-			console.log(mes);
+			logger.info(mes);
 			response.json({result: mes});
 		}
 	//}
@@ -328,21 +320,21 @@ app.post("/home",
 		// 	cronFunc.stopCronTasks(cronTasks);
 		// }
 		// if ((date != "startCronTasks" ) && (date != "stopCronTasks" )){
-			//console.log(request.body.data);
+			//logger.info(request.body.data);
 		const bdRows = JSON.stringify(request.body.data.bdRows);
 		const bdRowsArr = request.body.data.bdRows.bdRows;
 		let currUserEmail = JSON.stringify(request.body.data.currUserEmail);	
 		currUserEmail = currUserEmail.replace(/"/g,'');
-		//console.log(currUserEmail);
+		//logger.info(currUserEmail);
 		if (currUserEmail){		
 			PersBD.findAll({
 				where:{
 					email:currUserEmail
 				}
 			}).then(res=>{
-				console.log(res)
+				logger.info(res)
 				if (res.length>0){
-					console.log(`<< Изменение записи в базе (изменены задачи пользователя: ${currUserEmail} >>`);
+					logger.info(`<< Изменение записи в базе (изменены задачи пользователя: ${currUserEmail} >>`);
 					PersBD.update({ bdData: bdRows }, {
 						where: {
 						email: currUserEmail
@@ -352,41 +344,41 @@ app.post("/home",
 							//response.send("<< данные таблицы обновлены >>");
 							const mes = "Данные таблицы обновлены";
 							response.json({result: "ok", mes: mes});
-							console.log("<< Запуск функции updateAndStartCronTasks >>");
+							logger.info("<< Запуск функции updateAndStartCronTasks >>");
 							cronFunc.updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
 						}else{
 							response.json({result: "ok", mes: "обновление таблицы не требуется"});
-							console.log("<< Запуск функции updateAndStartCronTasks >>");
+							logger.info("<< Запуск функции updateAndStartCronTasks >>");
 						}
-					//}).catch(err=>console.log(err));
+					//}).catch(err=>logger.info(err));
 					}).catch((err)=>{
-						console.log(err)
+						logger.info(err)
 						response.json({result: "Ошибка сервера"});
 					});
 				
 					// }else{
-				// 	console.log(`<< добавление записи в базу (добавлен новый пользователь и его задачи: ${currUserEmail} >>`);
+				// 	logger.info(`<< добавление записи в базу (добавлен новый пользователь и его задачи: ${currUserEmail} >>`);
 				// 	PersBD.create({
 				// 		email: currUserEmail,
 				// 		bdData: bdRows,
 				// 		hash: jwtHash
 				// 	}).then(res=>{
-				// 		//console.log(res);
+				// 		//logger.info(res);
 				// 		if (!_.isEmpty(res)){
-				// 			console.log("запуск функции updateAndStartCronTasks");
+				// 			logger.info("запуск функции updateAndStartCronTasks");
 				// 			cronFunc.updateAndStartCronTasksByForUser(bdRowsArr, currUserEmail);
 				// 		}
-				// 	}).catch(err=>console.log(err));
+				// 	}).catch(err=>logger.info(err));
 				 }
 				//response.send("<<данные таблицы обновлены>>");
-			//}).catch(err=>console.log(err));
+			//}).catch(err=>logger.info(err));
 		}).catch((err)=>{
-			console.log(err)
+			logger.info(err)
 			response.json({result: "Ошибка сервера"});
 		});
 		}else{
 			const mes = "Не определен Email!"
-			console.log(mes);
+			logger.info(mes);
 			response.status(401).send({result: mes});
 		}
 	//	}
@@ -394,13 +386,13 @@ app.post("/home",
     //response.send("!!!");
 });
 
-	console.log('<< tasks: start waiting all - after restart server >>');
+	logger.info('<< tasks: start waiting all - after restart server >>');
 	cronFunc.createParamsCheckAndStartCronTasksForAll();
 
 	// останавливаем все cron tasks, для перезапуска с учетом изменений
 	cron.schedule(timeStopCronTasks, () => 
 	{
-		console.log('<< tasks: destroy all >>');
+		logger.info('<< tasks: destroy all >>');
 		cronFunc.stopCronTasks(cronTasks);
 	}, {
 		scheduled: true,
@@ -410,7 +402,7 @@ app.post("/home",
 	// запускаем на ожидание все cron tasks на сегодня, с учетом изменений
 	cron.schedule(timeStartCronTasks, () =>
 	{
-		console.log('<< tasks: start waiting all - for today>>');
+		logger.info('<< tasks: start waiting all - for today>>');
 		cronFunc.createParamsCheckAndStartCronTasksForAll();
 	}, {
 		scheduled: true,

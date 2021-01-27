@@ -2,9 +2,9 @@ const LocalStrategy = require('passport-local').Strategy
 const passportJWT = require('passport-jwt')
 const JWTStrategy = passportJWT.Strategy
 const ExtractJWT = passportJWT.ExtractJwt
-const config = require('../config.js');
+const config = require('../../config.js');
 const jwtTokenKey = config.jwtTokenKey;
-const PersBD = require(`./db-seq`);
+const PersBD = require(`../db/db-seq`);
 const bcrypt = require( 'bcrypt' );  // хеширование паролей
 
 module.exports = (passport) => {

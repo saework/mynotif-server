@@ -1,6 +1,6 @@
 
 const { Sequelize, Model, DataTypes } = require("sequelize");
-const config = require('../config.js');
+const config = require('../../config.js');
 const sequelizeConfig = config.sequelizeConfig;
 
 const sequelize = new Sequelize(sequelizeConfig.DBName, sequelizeConfig.DBLogin, sequelizeConfig.DBPass, {

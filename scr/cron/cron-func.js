@@ -1,10 +1,11 @@
 const moment = require('moment'); 
 const _ = require('lodash');
-const config = require('../config.js');
+const config = require('../../config.js');
 const cronTasks = require(`./cron-tasks`);
 const cron = require('node-cron');
-const PersBD = require(`./db-seq`);
-const emailFunc = require(`./email-func`);
+const PersBD = require(`../db/db-seq`);
+const emailFunc = require(`../services/email-func`);
+const logger = require('../services/logger-config');
 
 const repeatMap = config.repeatMap;
 
@@ -72,7 +73,7 @@ let createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
 			});
 		}
 	}catch(e){
-		console.log(e);
+		logger.info(e);
 	}
 }
 // запуск/перезапуск cron задач пользователя на ожидание после изменения им списка/параметров собственных задач
@@ -85,37 +86,37 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 		return new Promise((res) => {
 			if (bdRowsArr.length > 0){
 				createCronTaskParamObjs(cronTaskParamsArr, bdRowsArr, currUserEmail)
-				console.log("<<cronTaskParamsArr сформирован>>");
+				logger.info("<<cronTaskParamsArr сформирован>>");
 			}		
 			res(cronTaskParamsArr);
 		});
 	}).then(()=>{
 		if (cronTaskParamsArr.length > 0){
-			console.log("<<запуск функции checkAndStartCronTasks>>");
+			logger.info("<<запуск функции checkAndStartCronTasks>>");
 			checkAndStartCronTasks(cronTaskParamsArr);
 		}else{
-			console.log("<<массив cronTaskParamsArr пуст>>");
+			logger.info("<<массив cronTaskParamsArr пуст>>");
 		}	
-	}).catch(err=>console.log(err));
+	}).catch(err=>logger.info(err));
 }
 
 // запуск cron задачи на ожидание
  let startCronTasks= (cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText) => {
 	cronTasks[cronTaskName] = cron.schedule(cronTaskTime, () => 
 	{
-	  console.log(`Task - start - ${cronTaskName} - ${new Date()}`);
+	  logger.info(`Task - start - ${cronTaskName} - ${new Date()}`);
 	  emailFunc.sendEmail(emailAddress, emailCapt, emailText).catch(console.error);
 	}, {
 	  scheduled: true,
 	  timezone: cronTimeZone
 	});
-	console.log(`Task - start waiting - ${cronTaskName} - ${new Date()}`);
+	logger.info(`Task - start waiting - ${cronTaskName} - ${new Date()}`);
 	cronTasks[cronTaskName].start();
  }
 
 	let checkAndStartCronTasks = (cronTaskParamsArr) => {
-		//console.log(cronTaskParamsArr.length)
-		console.log(`<<cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
+		//logger.info(cronTaskParamsArr.length)
+		logger.info(`<<cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
 		cronTaskParamsArr.forEach((cronTaskParamsObj)=> {
 		
 		const { cronTaskName, cronTaskTime, cronTaskPeriod, cronStartDay, cronStartMonth, cronStartYear, cronStartHour, cronStartMinute, cronStartWeekDay, cronTimeZone, emailAddress, emailCapt, emailText } = cronTaskParamsObj;
@@ -165,12 +166,12 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 				break;
 			}
 			default: {
-				console.log("<<проверка и старт задач по cronTaskParamsArr - отсутствуют задачи для старта>>")
+				logger.info("<<проверка и старт задач по cronTaskParamsArr - отсутствуют задачи для старта>>")
 			}
 		}
 	});
-	console.log("<<проверка и старт задач по cronTaskParamsArr - завершено >>");
-	console.log(cronTasks);
+	logger.info("<<проверка и старт задач по cronTaskParamsArr - завершено >>");
+	logger.info(cronTasks);
  };
 
  let createParamsCheckAndStartCronTasksForAll = () => {
@@ -179,8 +180,8 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 	PersBD.findAll({
 		attributes:['bdData','email']
 	}).then(res=>{
-		console.log(`<<получены данные bdData из базы>>`);
-		console.log(res);
+		logger.info(`<<получены данные bdData из базы>>`);
+		logger.info(res);
 		return(res)
 	}).then(res=>{
 	if (res){
@@ -190,27 +191,27 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 			if (bdDataString){
 				//const bdRows = JSON.parse(bdDataString).bdRows;
 				const bdData = JSON.parse(bdDataString);
-				console.log(bdData);
+				logger.info(bdData);
 				const bdRows = bdData.bdRows;
-				console.log(bdRows);
+				logger.info(bdRows);
 				const email = row.dataValues.email;
-				//console.log(bdData);
+				//logger.info(bdData);
 				// createCronTaskParamObjs(cronTaskParamsArr, bdRows, email)  
 				createCronTaskParamObjs(cronTaskParamsArr, bdRows, email);
 			}
 		});
 	}
-	console.log("<<cronTaskParamsArr сформирован>>");
-	//console.log(cronTaskParamsArr);
+	logger.info("<<cronTaskParamsArr сформирован>>");
+	//logger.info(cronTaskParamsArr);
 	return cronTaskParamsArr;
 	}).then(cronTaskParamsArr=>{
 		checkAndStartCronTasks(cronTaskParamsArr);
-	}).catch(err=>console.log(err));
+	}).catch(err=>logger.info(err));
  }
 
  
  let stopCronTasks = (cronTasks, email = "all") => {
-	 //console.log(cronTasks);
+	 //logger.info(cronTasks);
 	 if (!_.isEmpty(cronTasks)){
 		let nemail;
 		if (email !== "all"){
@@ -222,7 +223,7 @@ let updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail)=>{
 				cronNemail = key.split("_")[0];
 			}
 			if (cronNemail===nemail){
-				console.log(`Task - destroy - ${key} - ${new Date()}`);
+				logger.info(`Task - destroy - ${key} - ${new Date()}`);
 				cronTasks[key].destroy();
 				}
 		}
