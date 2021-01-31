@@ -1,4 +1,5 @@
 
+const logger = require('../services/logger-config');
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const config = require('../../config.js');
 const sequelizeConfig = config.sequelizeConfig;
@@ -41,9 +42,9 @@ PersBD.init({
 
 try{
 	sequelize.authenticate();
-	console.log("Connection Successful"); 
+	logger.info(`DB-seq - Соединение с БД установлено`);
 }catch (error){
-	console.log(error);
+	logger.error(`DB-seq - Ошибка: ${err}`);
 }
 
 module.exports = PersBD;

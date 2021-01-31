@@ -877,3 +877,693 @@
 [2021-01-27T21:53:44.914] [INFO] mynotif - <<cronTaskParamsArr - []
 [2021-01-27T21:53:44.914] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
 [2021-01-27T21:53:44.915] [INFO] mynotif - {}
+[2021-01-27T21:59:21.989] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T21:59:22.059] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T21:59:22.060] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T21:59:22.062] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T21:59:22.063] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T21:59:22.065] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T21:59:22.065] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T21:59:22.066] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T21:59:22.067] [INFO] mynotif - {}
+[2021-01-27T22:01:41.986] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:01:42.051] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:01:42.052] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:01:42.054] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:01:42.055] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:01:42.057] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:01:42.058] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:01:42.059] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:01:42.060] [INFO] mynotif - {}
+[2021-01-27T22:08:16.156] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:08:16.214] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:08:16.215] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:08:16.217] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:08:16.219] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:08:16.220] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:08:16.221] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:08:16.221] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:08:16.222] [INFO] mynotif - {}
+[2021-01-27T22:12:27.305] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:12:27.360] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:12:27.360] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:12:27.363] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:12:27.364] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:12:27.366] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:12:27.366] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:12:27.367] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:12:27.367] [INFO] mynotif - {}
+[2021-01-27T22:13:09.617] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:13:09.685] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:13:09.686] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:13:09.689] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:13:09.690] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:13:09.691] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:13:09.692] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:13:09.693] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:13:09.694] [INFO] mynotif - {}
+[2021-01-27T22:29:38.855] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:29:38.924] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:29:38.925] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:29:38.929] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:29:38.931] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:29:38.933] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:29:38.934] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:29:38.935] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:29:38.935] [INFO] mynotif - {}
+[2021-01-27T22:30:12.064] [INFO] mynotif - test3@test.ru
+[2021-01-27T22:30:12.185] [INFO] mynotif - <<Получен hash пользователя>>
+[2021-01-27T22:30:12.186] [INFO] mynotif - ReferenceError: userFunc is not defined
+    at C:\Dev\mydev\mynotif\server\app.js:129:31
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[2021-01-27T22:31:58.781] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:31:58.839] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:31:58.839] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:31:58.843] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:31:58.844] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:31:58.845] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:31:58.845] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:31:58.846] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:31:58.847] [INFO] mynotif - {}
+[2021-01-27T22:32:05.312] [INFO] mynotif - test3@test.ru
+[2021-01-27T22:32:05.318] [INFO] mynotif - <<Получен hash пользователя>>
+[2021-01-27T22:32:05.319] [INFO] mynotif - ReferenceError: userFunc is not defined
+    at C:\Dev\mydev\mynotif\server\app.js:129:31
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[2021-01-27T22:34:22.989] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:34:23.050] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:34:23.051] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:34:23.055] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:34:23.056] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:34:23.058] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:34:23.059] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:34:23.060] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:34:23.060] [INFO] mynotif - {}
+[2021-01-27T22:35:05.483] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:35:05.539] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:35:05.540] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:35:05.542] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:35:05.543] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:35:05.544] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:35:05.545] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:35:05.545] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:35:05.546] [INFO] mynotif - {}
+[2021-01-27T22:36:06.379] [INFO] mynotif - << tasks: start waiting all - after restart server >>
+[2021-01-27T22:36:06.445] [INFO] mynotif - <<получены данные bdData из базы>>
+[2021-01-27T22:36:06.446] [INFO] mynotif - [
+  persbd {
+    dataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _previousDataValues: {
+      bdData: '{"currentUser":"test@test.ru","currentId":2,"checkedId":0,"bdRows":[{"id":1,"persName":"Иванов Иван Иванович1","bdDate":"24.01.2021, 9:00","bdComm":"111","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"},{"id":2,"persName":"Иванов Иван Иванович2","bdDate":"24.01.2021, 9:00","bdComm":"222","bdTmz":"Asia/Yekaterinburg","bdPeriod":"Без повторов"}]}',
+      email: 'test@test.ru'
+    },
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+[2021-01-27T22:36:06.449] [INFO] mynotif - {
+  currentUser: 'test@test.ru',
+  currentId: 2,
+  checkedId: 0,
+  bdRows: [
+    {
+      id: 1,
+      persName: 'Иванов Иван Иванович1',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '111',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    },
+    {
+      id: 2,
+      persName: 'Иванов Иван Иванович2',
+      bdDate: '24.01.2021, 9:00',
+      bdComm: '222',
+      bdTmz: 'Asia/Yekaterinburg',
+      bdPeriod: 'Без повторов'
+    }
+  ]
+}
+[2021-01-27T22:36:06.450] [INFO] mynotif - [
+  {
+    id: 1,
+    persName: 'Иванов Иван Иванович1',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '111',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  },
+  {
+    id: 2,
+    persName: 'Иванов Иван Иванович2',
+    bdDate: '24.01.2021, 9:00',
+    bdComm: '222',
+    bdTmz: 'Asia/Yekaterinburg',
+    bdPeriod: 'Без повторов'
+  }
+]
+[2021-01-27T22:36:06.452] [INFO] mynotif - <<cronTaskParamsArr сформирован>>
+[2021-01-27T22:36:06.453] [INFO] mynotif - <<cronTaskParamsArr - []
+[2021-01-27T22:36:06.454] [INFO] mynotif - <<проверка и старт задач по cronTaskParamsArr - завершено >>
+[2021-01-27T22:36:06.455] [INFO] mynotif - {}
