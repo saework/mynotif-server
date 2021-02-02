@@ -1,0 +1,21 @@
+module.exports = {
+    extends: ['airbnb-base'],
+    env: {
+      "node": true,
+      "es6": true
+    },
+   parserOptions: {
+    ecmaVersion: 8
+  },
+  rules: {
+    "comma-dangle": 0,
+    'max-len': ["error", { "code": 200 }],
+    "prefer-destructuring": ["error", {
+      "AssignmentExpression": {
+        "array": false,
+        "object": false
+      }
+    }]
+    // "import/newline-after-import":0
+  }
+};
