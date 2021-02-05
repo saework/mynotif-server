@@ -7,4 +7,4 @@ workspace.code-workspace
 .prettierrc.extension.json
 build/
 logs/
-
+app.test.js

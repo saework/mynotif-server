@@ -1,24 +1,24 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt'); // хеширование паролей
 const passport = require('passport');
-const PersBD = require('../db/db-seq');
 require('../services/passp-strateg.js')(passport);
+const bcrypt = require('bcrypt'); // хеширование паролей
+const jwt = require('jsonwebtoken');
 const config = require('../../config.js');
+const PersBD = require('../db/db-seq');
 const logger = require('../services/logger-config');
 
-const { jwtTokenKey } = config;
+const jwtTokenKey = config.jwtTokenKey;
 
 const login = (request, response) => {
   passport.authenticate('local', { session: false }, (err, user) => {
     if (err) {
       const mes = 'Ошибка аутентификации!';
       logger.error(`Reqest-login - Ошибка: ${mes}: ${err}`);
-      response.status(401).json({ result: mes, err });
+      return response.status(401).json({ result: mes, err });
     }
     if (!user) {
       const mes = 'Не верный логин или пароль!';
       logger.warn(`Reqest-login - ${mes}`);
-      response.status(401).json({ result: mes, err: null });
+      return response.status(401).json({ result: mes, err: null });
     }
     request.login(user, { session: false }, (errLogin) => {
       if (errLogin) {
@@ -43,7 +43,10 @@ const login = (request, response) => {
             if (res[0] === 1) {
               logger.info(`Reqest-login - jwtHash записан в БД для пользователя: ${user}`);
               response.json({ jwtToken });
+              return jwtToken;
             }
+            // }).catch(err=>logger.info(err));
+            //  return null;
           })
           .catch((errUpd) => {
             logger.error(`Reqest-login - Ошибка: ${errUpd}`);
@@ -52,9 +55,11 @@ const login = (request, response) => {
       } else {
         const mes = 'Не определен jwtHash. Вход в систему отклонен.';
         logger.warn(`Reqest-login - ${mes}`);
-        response.json({ result: 'Ошибка сервера' });
+        return response.json({ result: 'Ошибка сервера' });
       }
+      // return null;
     });
+    // return null;
   })(request, response);
 };
 

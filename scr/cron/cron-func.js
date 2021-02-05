@@ -30,23 +30,34 @@ const createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
   try {
     if (bdRows.length > 0 && email) {
       bdRows.forEach((bdRow) => {
-        const { bdDate } = bdRow;
-        const { bdPeriod } = bdRow;
-        const { persName } = bdRow;
-        const { bdComm } = bdRow;
-        const { bdTmz } = bdRow;
+        // const { bdDate } = bdRow;
+        // const { bdPeriod } = bdRow;
+        // const { persName } = bdRow;
+        // const { bdComm } = bdRow;
+        // const { bdTmz } = bdRow;
+        const {
+          bdDate, bdPeriod, persName, bdComm, bdTmz
+        } = bdRow;
+
         if (bdDate && bdPeriod) {
           const date = bdDate.split(', ')[0];
           const time = bdDate.split(', ')[1];
           if (date && time) {
-            const day = Number(date.split('.')[0]);
-            const month = Number(date.split('.')[1]);
-            const year = Number(date.split('.')[2]);
-            const hour = Number(time.split(':')[0]);
-            const minute = Number(time.split(':')[1]);
-            if (day && month && year && hour && minute) {
+            const dayStr = date.split('.')[0];
+            const monthStr = date.split('.')[1];
+            const yearStr = date.split('.')[2];
+            const hourStr = time.split(':')[0];
+            const minuteStr = time.split(':')[1];
+            if (dayStr && monthStr && yearStr && hourStr && minuteStr) {
+              const day = Number(dayStr);
+              const month = Number(monthStr);
+              const year = Number(yearStr);
+              const hour = Number(hourStr);
+              const minute = Number(minuteStr);
+              // if (day && month && year && hour && minute) {
               const weekDay = Number(moment(date, 'DD.MM.YYYY').day());
-              const ndate = `${day}${month}${year}${hour}${minute}`;
+              // const ndate = `${day}${month}${year}${hour}${minute}`;
+              const ndate = `${dayStr}_${monthStr}_${yearStr}_${hourStr}_${minuteStr}`;
               const cronTime = `${minute} ${hour} * * *`;
               const emailCapt = `Уведомление mynotif.ru - ${persName}`;
               const emailText = `<b>${persName}</b><b>${bdComm}</b>`;
@@ -68,8 +79,14 @@ const createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
               };
               cronTaskParamsArr.push(cronTaskParamsObj);
               // logger.info(`Cron-func - cron параметры добавлены в массив cronTaskParamsArr для пользователя: ${email}`);
+            } else {
+              logger.warn(`Cron-func - не верный формат данных: ${bdRow}`);
             }
+          } else {
+            logger.warn(`Cron-func - не верный формат данных: ${bdRow}`);
           }
+        } else {
+          logger.warn(`Cron-func - не верный формат данных: ${bdRow}`);
         }
       });
     }
@@ -100,6 +117,7 @@ const startCronTask = (cronTaskName, cronTaskTime, cronTimeZone, emailAddress, e
 const checkAndStartCronTasks = (cronTaskParamsArr) => {
   logger.info('Cron-func - запуск функции checkAndStartCronTasks (Проверка задач на необходимость старта)');
   // logger.info(`Cron-func - cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
+  let email;
   cronTaskParamsArr.forEach((cronTaskParamsObj) => {
     const {
       cronTaskName, cronTaskTime, cronTaskPeriod, cronStartDay, cronStartMonth, cronStartYear, cronStartWeekDay, cronTimeZone, emailAddress, emailCapt, emailText
@@ -110,6 +128,7 @@ const checkAndStartCronTasks = (cronTaskParamsArr) => {
     const currMonth = Number(currDate.getMonth()) + 1;
     const currYear = Number(currDate.getFullYear());
     const workWeekDays = [1, 2, 3, 4, 5];
+    email = emailAddress;
 
     switch (cronTaskPeriod) {
       case repeatMap.norep: {
@@ -159,7 +178,8 @@ const checkAndStartCronTasks = (cronTaskParamsArr) => {
       }
     }
   });
-  logger.info(`CronTasks: ${cronTasks}`);
+  const cronTasksKeys = Object.keys(cronTasks).join(', ');
+  logger.info(`Cron задачи в ожидании для пользователя: ${email} - CronTasksKeys: ${cronTasksKeys}`);
 };
 
 // Уничтожить все cron задачи или задачи пользователя по email
@@ -173,7 +193,8 @@ const stopCronTasks = (email = 'all') => {
     } else {
       logger.info('Cron-func - функция stopCronTasks - уничтожение задач всех пользователей');
     }
-    cronTasks.forEach((key) => {
+    // cronTasks.forEach((key) => {
+    Object.keys(cronTasks).forEach((key) => {
       let cronNemail;
       if (email !== 'all') {
         cronNemail = key.split('_')[0];
@@ -181,6 +202,7 @@ const stopCronTasks = (email = 'all') => {
       if (cronNemail === nemail) {
         logger.info(`Task - destroy - ${key}`);
         cronTasks[key].destroy();
+        delete cronTasks[key];
       }
     });
   } else {
@@ -199,7 +221,9 @@ const updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail) => {
   })
     .then(
       () => new Promise((res) => {
-        if (bdRowsArr.length > 0) {
+        // return new Promise((res) => {
+        // if (bdRowsArr.length > 0) {
+        if (!_.isEmpty(bdRowsArr)) {
           createCronTaskParamObjs(cronTaskParamsArr, bdRowsArr, currUserEmail);
         }
         res(cronTaskParamsArr);

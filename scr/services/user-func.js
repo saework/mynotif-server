@@ -37,29 +37,31 @@ const createUserAccount = (currUserEmail, password, response) => {
           const resCr = { result: 'jwt', jwt: jwtToken };
           logger.info(`CreateUserAccount - jwtToken:  ${jwtToken}`);
           response.json(resCr);
-          // return resCr;
+          return resCr;
         }
         const mes = 'Учетная запись не создана. Ошибка БД';
         logger.warn(`CreateUserAccount - ${mes}`);
         response.json({ result: 'Ошибка сервера' });
-        // return { result: mes };
+        return { result: mes };
+
+        // }).catch(err=>logger.info(err));
       })
       .catch((err) => {
         logger.error(`CreateUserAccount - Ошибка: ${err}`);
         response.json({ result: 'Ошибка сервера' });
-        // return { result: mes };
+        return { result: err };
       });
   } else {
     const mes = 'Учетная запись не создана. Ошибка генерации hash';
     logger.warn(`CreateUserAccount - ${mes}`);
     response.json({ result: 'Ошибка сервера' });
-    // return { result: mes };
+    return { result: mes };
   }
+  //  return null;
 };
 
 const deleteUserAccount = (currUserEmail) => {
   logger.info(`DeleteUserAccount - запуск функции для пользователя: ${currUserEmail}`);
-  let resDel;
   if (currUserEmail) {
     PersBD.destroy({
       where: { email: currUserEmail },
@@ -68,26 +70,22 @@ const deleteUserAccount = (currUserEmail) => {
         if (resDeleteUser === 1) {
           const mes = 'Учетная запись удалена';
           logger.info(`DeleteUserAccount - ${mes}`);
-          // return mes;
-          resDel = mes;
+          return mes;
         }
         const mes = 'Учетная запись не удалена. Ошибка БД';
         logger.warn(`DeleteUserAccount - ${mes}`);
-        // return mes;
-        resDel = mes;
+        return mes;
       })
       .catch((err) => {
         logger.error(`DeleteUserAccount - Ошибка: ${err}`);
-        // return err;
-        resDel = err;
+        return err;
       });
   } else {
     const mes = 'Не определен Email пользователя';
     logger.warn(`DeleteUserAccount - ${mes}`);
-    // return mes;
-    resDel = mes;
+    return mes;
   }
-  return resDel;
+  // return null;
 };
 module.exports = {
   generatePassword,

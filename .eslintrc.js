@@ -15,7 +15,8 @@ module.exports = {
         "array": false,
         "object": false
       }
-    }]
+    }],
+    "consistent-return": 0
     // "import/newline-after-import":0
   }
 };
