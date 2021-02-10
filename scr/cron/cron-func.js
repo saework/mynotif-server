@@ -25,7 +25,7 @@ const generateCronTaskName = (email, ndate, repeat) => {
 };
 
 // Формирование параметров для запуска cron задач
-const createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
+const createCronTaskParamObjs = async (cronTaskParamsArr, bdRows, email) => {
   logger.info(`Cron-func - запуск функции createCronTaskParamObjs (Формирование параметров для запуска cron задач) для пользователя: ${email}`);
   try {
     if (bdRows.length > 0 && email) {
@@ -96,7 +96,7 @@ const createCronTaskParamObjs = (cronTaskParamsArr, bdRows, email) => {
 };
 
 // Запуск cron задачи на ожидание
-const startCronTask = (cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText) => {
+const startCronTask = async (cronTaskName, cronTaskTime, cronTimeZone, emailAddress, emailCapt, emailText) => {
   logger.info(`Cron-func - запуск функции startCronTask (Запуск cron задачи на ожидание) - cronTaskName: ${cronTaskName}, cronTaskTime: ${cronTaskTime}`);
   cronTasks[cronTaskName] = cron.schedule(
     cronTaskTime,
@@ -114,10 +114,10 @@ const startCronTask = (cronTaskName, cronTaskTime, cronTimeZone, emailAddress, e
   cronTasks[cronTaskName].start();
 };
 // Проверка задач на необходимость старта
-const checkAndStartCronTasks = (cronTaskParamsArr) => {
+const checkAndStartCronTasks = async (cronTaskParamsArr) => {
   logger.info('Cron-func - запуск функции checkAndStartCronTasks (Проверка задач на необходимость старта)');
   // logger.info(`Cron-func - cronTaskParamsArr - ${JSON.stringify(cronTaskParamsArr)}`);
-  let email;
+  // let email;
   cronTaskParamsArr.forEach((cronTaskParamsObj) => {
     const {
       cronTaskName, cronTaskTime, cronTaskPeriod, cronStartDay, cronStartMonth, cronStartYear, cronStartWeekDay, cronTimeZone, emailAddress, emailCapt, emailText
@@ -128,7 +128,7 @@ const checkAndStartCronTasks = (cronTaskParamsArr) => {
     const currMonth = Number(currDate.getMonth()) + 1;
     const currYear = Number(currDate.getFullYear());
     const workWeekDays = [1, 2, 3, 4, 5];
-    email = emailAddress;
+    // email = emailAddress;
 
     switch (cronTaskPeriod) {
       case repeatMap.norep: {
@@ -179,16 +179,17 @@ const checkAndStartCronTasks = (cronTaskParamsArr) => {
     }
   });
   const cronTasksKeys = Object.keys(cronTasks).join(', ');
-  logger.info(`Cron задачи в ожидании для пользователя: ${email} - CronTasksKeys: ${cronTasksKeys}`);
+  // logger.info(`Cron задачи в ожидании для пользователя: ${email} - CronTasksKeys: ${cronTasksKeys}`);
+  logger.info(`Cron задачи в ожидании на сегодня - CronTasksKeys: ${cronTasksKeys}`);
 };
 
 // Уничтожить все cron задачи или задачи пользователя по email
-const stopCronTasks = (email = 'all') => {
+const stopCronTasks = async (email = 'all') => {
   logger.info('Cron-func - запуск функции stopCronTasks (Уничтожить все cron задачи или задачи пользователя по email)');
   if (!_.isEmpty(cronTasks)) {
     let nemail;
     if (email !== 'all') {
-      nemail = getCronEmailName(email);
+      nemail = await getCronEmailName(email);
       logger.info(`Cron-func - функция stopCronTasks - уничтожение задач пользователя: ${email}`);
     } else {
       logger.info('Cron-func - функция stopCronTasks - уничтожение задач всех пользователей');

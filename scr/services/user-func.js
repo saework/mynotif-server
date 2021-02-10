@@ -22,7 +22,8 @@ const createUserAccount = (currUserEmail, password, response) => {
   logger.info(`CreateUserAccount - запуск функции для пользователя: ${currUserEmail}`);
   const passwordHash = bcrypt.hashSync(password, 10);
   // генерируем jwt токен
-  const jwtToken = jwt.sign({ currUserEmail }, jwtTokenKey);
+  const user = currUserEmail;
+  const jwtToken = jwt.sign({ user }, jwtTokenKey);
   const jwtHash = bcrypt.hashSync(jwtToken, 10);
   if (jwtToken && jwtHash) {
     PersBD.create({

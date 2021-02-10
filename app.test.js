@@ -87,6 +87,7 @@ describe('Тесты http запросов', () => {
     chai
       .request(server)
       .post('/home')
+      .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
           bdRows: [],
@@ -109,6 +110,7 @@ describe('Тесты http запросов', () => {
     chai
       .request(server)
       .post('/home')
+      .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
           bdRows: [

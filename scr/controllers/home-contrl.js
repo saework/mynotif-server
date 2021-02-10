@@ -6,6 +6,7 @@ const home = (request, response) => {
   const date = request.body.data;
   // logger.info(`Reqest-home - date:${date}`);
   if (date) {
+    // Действия при сохранении данных в БД
     const bdRows = JSON.stringify(date.bdRows);
     const bdRowsArr = date.bdRows.bdRows;
     let currUserEmail = JSON.stringify(date.currUserEmail);

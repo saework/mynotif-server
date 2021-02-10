@@ -1,9 +1,10 @@
 const log4js = require('log4js');
+const moment = require('moment');
 const config = require('../../config.js');
 
-const prod = config.prod;
-if (prod) {
-  const date = `${new Date().getDay()}._${new Date().getMonth()}_${new Date().getFullYear()}`;
+const DEV = config.DEV;
+if (!DEV) {
+  const date = moment(new Date()).format('DD_MM_YYYY');
   log4js.configure({
     appenders: {
       console: { type: 'console' },
