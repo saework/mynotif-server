@@ -4,7 +4,7 @@ node_modules/**/*.js
 workspace.code-workspace
 .gitignore
 .prettierignore
-.prettierrc.extension.json
+.prettierrc.json
 build/
 logs/
 app.test.js

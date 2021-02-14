@@ -213,11 +213,11 @@ const stopCronTasks = async (email = 'all') => {
 };
 
 // Запуск/перезапуск cron задач пользователя на ожидание после изменения им списка/параметров собственных задач
-const updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail) => {
+const updateAndStartCronTasksByForUser = (bdRowsArr, currentUser) => {
   logger.info('Cron-func - запуск функции updateAndStartCronTasksByForUser (Запуск/перезапуск cron задач пользователя на ожидание после изменения им списка/параметров собственных задач)');
   const cronTaskParamsArr = [];
   new Promise((res) => {
-    const stopCronTasksResult = stopCronTasks(currUserEmail);
+    const stopCronTasksResult = stopCronTasks(currentUser);
     res(stopCronTasksResult);
   })
     .then(
@@ -225,7 +225,7 @@ const updateAndStartCronTasksByForUser = (bdRowsArr, currUserEmail) => {
         // return new Promise((res) => {
         // if (bdRowsArr.length > 0) {
         if (!_.isEmpty(bdRowsArr)) {
-          createCronTaskParamObjs(cronTaskParamsArr, bdRowsArr, currUserEmail);
+          createCronTaskParamObjs(cronTaskParamsArr, bdRowsArr, currentUser);
         }
         res(cronTaskParamsArr);
       })

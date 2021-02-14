@@ -18,16 +18,16 @@ const generatePassword = () => {
   return retVal;
 };
 
-const createUserAccount = (currUserEmail, password, response) => {
-  logger.info(`CreateUserAccount - запуск функции для пользователя: ${currUserEmail}`);
+const createUserAccount = (currentUser, password, response) => {
+  logger.info(`CreateUserAccount - запуск функции для пользователя: ${currentUser}`);
   const passwordHash = bcrypt.hashSync(password, 10);
   // генерируем jwt токен
-  const user = currUserEmail;
+  const user = currentUser;
   const jwtToken = jwt.sign({ user }, jwtTokenKey);
   const jwtHash = bcrypt.hashSync(jwtToken, 10);
   if (jwtToken && jwtHash) {
     PersBD.create({
-      email: currUserEmail,
+      email: currentUser,
       bdData: '',
       hash: passwordHash,
       jwtHash,
@@ -61,11 +61,11 @@ const createUserAccount = (currUserEmail, password, response) => {
   //  return null;
 };
 
-const deleteUserAccount = (currUserEmail) => {
-  logger.info(`DeleteUserAccount - запуск функции для пользователя: ${currUserEmail}`);
-  if (currUserEmail) {
+const deleteUserAccount = (currentUser) => {
+  logger.info(`DeleteUserAccount - запуск функции для пользователя: ${currentUser}`);
+  if (currentUser) {
     PersBD.destroy({
-      where: { email: currUserEmail },
+      where: { email: currentUser },
     })
       .then((resDeleteUser) => {
         if (resDeleteUser === 1) {

@@ -91,7 +91,7 @@ describe('Тесты http запросов', () => {
       .send({
         data: {
           bdRows: [],
-          currUserEmail: 'test@test.ru',
+          currentUser: 'test@test.ru',
           jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY',
         },
       })
@@ -131,7 +131,7 @@ describe('Тесты http запросов', () => {
               bdPeriod: 'Ежедневно',
             },
           ],
-          currUserEmail: 'test@test.ru',
+          currentUser: 'test@test.ru',
           jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY',
         },
       })
@@ -150,7 +150,7 @@ describe('Тесты http запросов', () => {
       .request(server)
       .post('/load')
       .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
-      .send({ currUserEmail: 'test@test.ru' })
+      .send({ currentUser: 'test@test.ru' })
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -166,7 +166,7 @@ describe('Тесты http запросов', () => {
       .post('/newpassword')
       .send({
         data: {
-          currUserEmail: 'test@test.ru',
+          currentUser: 'test@test.ru',
         },
       })
       .end((err, res) => {

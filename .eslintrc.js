@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['airbnb-base'],
+    extends: ["airbnb-base"],
     env: {
       "node": true,
       "es6": true
@@ -9,7 +9,7 @@ module.exports = {
   },
   rules: {
     "comma-dangle": 0,
-    'max-len': ["error", { "code": 200 }],
+    "max-len": ["error", { "code": 200 }],
     "prefer-destructuring": ["error", {
       "AssignmentExpression": {
         "array": false,

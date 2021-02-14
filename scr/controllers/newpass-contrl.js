@@ -5,17 +5,17 @@ const emailFunc = require('../services/email-func');
 const logger = require('../services/logger-config');
 
 const newpassword = (request, response) => {
-  const { currUserEmail } = request.body.data;
-  if (currUserEmail) {
+  const { currentUser } = request.body.data;
+  if (currentUser) {
     const newPassword = userFunc.generatePassword();
     const passwordHash = bcrypt.hashSync(newPassword, 10);
     if (passwordHash) {
-      logger.info(`Reqest-newpassword - Изменение записи в БД (изменен hash пароля пользователя: ${currUserEmail})`);
+      logger.info(`Reqest-newpassword - Изменение записи в БД (изменен hash пароля пользователя: ${currentUser})`);
       PersBD.update(
         { hash: passwordHash },
         {
           where: {
-            email: currUserEmail,
+            email: currentUser,
           },
         }
       )
@@ -23,10 +23,10 @@ const newpassword = (request, response) => {
           if (res[0] === 1) {
             const emailCapt = 'Сервис mynotif.ru - пароль сброшен';
             const emailText = `<b>Новый пароль:</b><b>${newPassword}</b>`;
-            emailFunc.sendEmail(currUserEmail, emailCapt, emailText);
+            emailFunc.sendEmail(currentUser, emailCapt, emailText);
             const mes = 'Новый пароль отправлен на Ваш Email';
             logger.info(`Reqest-newpassword - ${mes}`);
-            response.json({ result: 'ok', mes });
+            response.json({ result: 'OK', mes });
           }
         })
         .catch((err) => {

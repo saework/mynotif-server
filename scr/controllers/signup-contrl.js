@@ -3,23 +3,23 @@ const userFunc = require('../services/user-func');
 const logger = require('../services/logger-config');
 
 const signup = (request, response) => {
-  let currUserEmail = request.body.username;
+  let currentUser = request.body.username;
   const { password } = request.body;
-  if (currUserEmail && password) {
-    currUserEmail = currUserEmail.replace(/"/g, '');
-    if (currUserEmail) {
-      logger.info(`Reqest-signup - currUserEmail: ${currUserEmail}`);
+  if (currentUser && password) {
+    currentUser = currentUser.replace(/"/g, '');
+    if (currentUser) {
+      logger.info(`Reqest-signup - currentUser: ${currentUser}`);
       PersBD.findOne({
         attributes: ['hash'],
         where: {
-          email: currUserEmail,
+          email: currentUser,
         },
       })
         .then((resHush) => {
-          logger.info(`Reqest-signup - Получен hash пользователя ${currUserEmail}`);
+          logger.info(`Reqest-signup - Получен hash пользователя ${currentUser}`);
           if (resHush === null) {
             logger.info('Reqest-signup - запуск функции createUserAccount');
-            userFunc.createUserAccount(currUserEmail, password, response);
+            userFunc.createUserAccount(currentUser, password, response);
           } else {
             const mes = 'Уже существует пользователь с таким email!';
             logger.info(`Reqest-signup - ${mes}`);

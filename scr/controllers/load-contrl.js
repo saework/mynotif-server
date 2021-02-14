@@ -3,18 +3,18 @@ const PersBD = require('../db/db-seq');
 
 const loadData = (request, response) => {
   // logger.info(request.headers)
-  let { currUserEmail } = request.body;
-  currUserEmail = currUserEmail.replace(/"/g, '');
-  if (currUserEmail) {
-    logger.info(`Reqest-load - currUserEmail: ${currUserEmail}`);
+  let { currentUser } = request.body;
+  currentUser = currentUser.replace(/"/g, '');
+  if (currentUser) {
+    logger.info(`Reqest-load - currentUser: ${currentUser}`);
     PersBD.findAll({
       attributes: ['bdData'],
       where: {
-        email: currUserEmail,
+        email: currentUser,
       },
     })
       .then((res) => {
-        logger.info(`Reqest-load - Получены данные из БД и отправлены пользователю: ${currUserEmail}`);
+        logger.info(`Reqest-load - Получены данные из БД и отправлены пользователю: ${currentUser}`);
         response.json(res);
         // logger.info(res);
       })
