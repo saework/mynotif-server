@@ -7,14 +7,15 @@ var PersBD = require('../db/db-seq');
 var cronFunc = require('../cron/cron-func');
 
 var home = function home(request, response) {
-  var date = request.body.data;
-  logger.info('Reqest-home - date:');
-  logger.info(date);
+  var date = request.body.data; // logger.info('Reqest-home - date:');
+  // logger.info(date);
 
   if (date) {
     // Действия при сохранении данных в БД
-    var bdRows = JSON.stringify(date.bdRows);
-    var bdRowsArr = date.bdRows.bdRows;
+    // const bdRows = JSON.stringify(date.bdRows);
+    // const bdRowsArr = date.bdRows.bdRows;
+    var bdRows = JSON.stringify(date.rootReducer);
+    var bdRowsArr = date.rootReducer.bdRows;
     var currentUser = JSON.stringify(date.currentUser);
 
     if (currentUser) {

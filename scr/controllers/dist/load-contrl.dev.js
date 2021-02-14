@@ -7,9 +7,9 @@ var PersBD = require('../db/db-seq');
 var loadData = function loadData(request, response) {
   // logger.info(request.headers)
   var currentUser = request.body.currentUser;
-  currentUser = currentUser.replace(/"/g, '');
 
   if (currentUser) {
+    currentUser = currentUser.replace(/"/g, '');
     logger.info("Reqest-load - currentUser: ".concat(currentUser));
     PersBD.findAll({
       attributes: ['bdData'],

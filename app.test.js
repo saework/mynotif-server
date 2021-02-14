@@ -90,7 +90,8 @@ describe('Тесты http запросов', () => {
       .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
-          bdRows: [],
+          // bdRows: [],
+          rootReducer: [],
           currentUser: 'test@test.ru',
           jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY',
         },
@@ -99,7 +100,7 @@ describe('Тесты http запросов', () => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res.body).to.haveOwnProperty('result');
-        expect(res.body.result).to.equal('ok');
+        expect(res.body.result).to.equal('OK');
         //expect(res.body.mes).to.equal("Данные таблицы обновлены")
 
         done();
@@ -113,7 +114,8 @@ describe('Тесты http запросов', () => {
       .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
-          bdRows: [
+          // bdRows: [
+          rootReducer: [
             {
               id: 1,
               persName: 'Задача пользователя 1',
@@ -139,7 +141,7 @@ describe('Тесты http запросов', () => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res.body).to.haveOwnProperty('result');
-        expect(res.body.result).to.equal('ok');
+        expect(res.body.result).to.equal('OK');
         expect(res.body.mes).to.equal('Данные таблицы обновлены');
         done();
       });
@@ -173,7 +175,7 @@ describe('Тесты http запросов', () => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res.body).to.haveOwnProperty('result');
-        expect(res.body.result).to.equal('ok');
+        expect(res.body.result).to.equal('OK');
         done();
       });
   });

@@ -4,12 +4,14 @@ const cronFunc = require('../cron/cron-func');
 
 const home = (request, response) => {
   const date = request.body.data;
-  logger.info('Reqest-home - date:');
-  logger.info(date);
+  // logger.info('Reqest-home - date:');
+  // logger.info(date);
   if (date) {
     // Действия при сохранении данных в БД
-    const bdRows = JSON.stringify(date.bdRows);
-    const bdRowsArr = date.bdRows.bdRows;
+    // const bdRows = JSON.stringify(date.bdRows);
+    // const bdRowsArr = date.bdRows.bdRows;
+    const bdRows = JSON.stringify(date.rootReducer);
+    const bdRowsArr = date.rootReducer.bdRows;
     let currentUser = JSON.stringify(date.currentUser);
     if (currentUser) {
       currentUser = currentUser.replace(/"/g, '');

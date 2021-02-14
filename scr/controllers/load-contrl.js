@@ -4,8 +4,8 @@ const PersBD = require('../db/db-seq');
 const loadData = (request, response) => {
   // logger.info(request.headers)
   let { currentUser } = request.body;
-  currentUser = currentUser.replace(/"/g, '');
   if (currentUser) {
+    currentUser = currentUser.replace(/"/g, '');
     logger.info(`Reqest-load - currentUser: ${currentUser}`);
     PersBD.findAll({
       attributes: ['bdData'],
