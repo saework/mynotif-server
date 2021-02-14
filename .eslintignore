@@ -8,3 +8,4 @@ workspace.code-workspace
 build/
 logs/
 app.test.js
+**/*/dist
