@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt'); // хеширование паролей
+const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require('passport-jwt');
 
@@ -52,7 +52,6 @@ module.exports = (passport) => {
         logger.info('Passport - Не определен логин или пароль');
         return done(null, false);
       }
-      //  return done(null, false);
     })
   );
 
@@ -87,8 +86,6 @@ module.exports = (passport) => {
               }
               logger.info('Passport - JwtHush пользователя отсутствует в системе');
               return done(null, false);
-
-              // }).catch(err=>console.log(err));
             })
             .catch((err) => {
               logger.error(`Passport - Ошибка: ${err}`);
@@ -102,7 +99,6 @@ module.exports = (passport) => {
         logger.info('Passport - jwtPayload не определен');
         return done(null, false);
       }
-      //  return done(null, false);
     })
   );
 };

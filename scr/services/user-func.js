@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const bcrypt = require('bcrypt'); // хеширование паролей
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const PersBD = require('../db/db-seq');
 const logger = require('./logger-config');
@@ -11,7 +11,6 @@ const generatePassword = () => {
   const length = 8;
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let retVal = '';
-  // for (let i = 0, n = charset.length; i < length; ++i) {
   for (let i = 0, n = charset.length; i < length; i += 1) {
     retVal += charset.charAt(Math.floor(Math.random() * n));
   }
@@ -21,7 +20,7 @@ const generatePassword = () => {
 const createUserAccount = (currentUser, password, response) => {
   logger.info(`CreateUserAccount - запуск функции для пользователя: ${currentUser}`);
   const passwordHash = bcrypt.hashSync(password, 10);
-  // генерируем jwt токен
+  // Генерация jwt
   const user = currentUser;
   const jwtToken = jwt.sign({ user }, jwtTokenKey);
   const jwtHash = bcrypt.hashSync(jwtToken, 10);
@@ -44,8 +43,6 @@ const createUserAccount = (currentUser, password, response) => {
         logger.warn(`CreateUserAccount - ${mes}`);
         response.json({ result: 'Ошибка сервера' });
         return { result: mes };
-
-        // }).catch(err=>logger.info(err));
       })
       .catch((err) => {
         logger.error(`CreateUserAccount - Ошибка: ${err}`);
@@ -58,7 +55,6 @@ const createUserAccount = (currentUser, password, response) => {
     response.json({ result: 'Ошибка сервера' });
     return { result: mes };
   }
-  //  return null;
 };
 
 const deleteUserAccount = (currentUser) => {
@@ -86,8 +82,8 @@ const deleteUserAccount = (currentUser) => {
     logger.warn(`DeleteUserAccount - ${mes}`);
     return mes;
   }
-  // return null;
 };
+
 module.exports = {
   generatePassword,
   createUserAccount,

@@ -2,7 +2,6 @@ const logger = require('../services/logger-config');
 const PersBD = require('../db/db-seq');
 
 const loadData = (request, response) => {
-  // logger.info(request.headers)
   let { currentUser } = request.body;
   if (currentUser) {
     currentUser = currentUser.replace(/"/g, '');
@@ -16,7 +15,6 @@ const loadData = (request, response) => {
       .then((res) => {
         logger.info(`Reqest-load - Получены данные из БД и отправлены пользователю: ${currentUser}`);
         response.json(res);
-        // logger.info(res);
       })
       .catch((err) => {
         logger.error(`Reqest-load - Ошибка: ${err}`);

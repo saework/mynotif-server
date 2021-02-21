@@ -18,7 +18,6 @@ if (!DEV) {
       out: {
         type: 'stdout',
         layout: {
-          // type: 'pattern', pattern: '%d %p %c %f:%l %m%n'
           type: 'pattern',
           pattern: '%d %p  %f:%l - %m%n',
         },

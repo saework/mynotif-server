@@ -4,12 +4,8 @@ const cronFunc = require('../cron/cron-func');
 
 const home = (request, response) => {
   const date = request.body.data;
-  // logger.info('Reqest-home - date:');
-  // logger.info(date);
   if (date) {
     // Действия при сохранении данных в БД
-    // const bdRows = JSON.stringify(date.bdRows);
-    // const bdRowsArr = date.bdRows.bdRows;
     const bdRows = JSON.stringify(date.rootReducer);
     const bdRowsArr = date.rootReducer.bdRows;
     let currentUser = JSON.stringify(date.currentUser);
@@ -22,7 +18,6 @@ const home = (request, response) => {
         },
       })
         .then((res) => {
-          // logger.info(res)
           if (res.length > 0) {
             logger.info(`Reqest-home - Изменение записи в базе (изменены задачи пользователя: ${currentUser}`);
             PersBD.update(
@@ -38,7 +33,6 @@ const home = (request, response) => {
                   const mes = 'Данные таблицы обновлены';
                   response.json({ result: 'OK', mes });
                   logger.info('Reqest-home - Запуск функции updateAndStartCronTasks');
-                  // logger.info(`Reqest-home - res.body: ${response.body}`);
                   cronFunc.updateAndStartCronTasksByForUser(bdRowsArr, currentUser);
                 } else {
                   response.json({ result: 'OK', mes: 'Обновление таблицы не требуется' });

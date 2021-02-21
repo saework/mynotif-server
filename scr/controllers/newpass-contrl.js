@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt'); // хеширование паролей
+const bcrypt = require('bcrypt');
 const PersBD = require('../db/db-seq');
 const userFunc = require('../services/user-func');
 const emailFunc = require('../services/email-func');

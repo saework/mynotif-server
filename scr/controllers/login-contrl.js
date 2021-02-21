@@ -1,6 +1,6 @@
 const passport = require('passport');
 require('../services/passp-strateg.js')(passport);
-const bcrypt = require('bcrypt'); // хеширование паролей
+const bcrypt = require('bcrypt'); // Хеширование паролей
 const jwt = require('jsonwebtoken');
 const config = require('../../config.js');
 const PersBD = require('../db/db-seq');
@@ -45,8 +45,6 @@ const login = (request, response) => {
               response.json({ jwtToken });
               return jwtToken;
             }
-            // }).catch(err=>logger.info(err));
-            //  return null;
           })
           .catch((errUpd) => {
             logger.error(`Reqest-login - Ошибка: ${errUpd}`);
@@ -57,9 +55,7 @@ const login = (request, response) => {
         logger.warn(`Reqest-login - ${mes}`);
         return response.json({ result: 'Ошибка сервера' });
       }
-      // return null;
     });
-    // return null;
   })(request, response);
 };
 

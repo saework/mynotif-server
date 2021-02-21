@@ -13,8 +13,6 @@ describe('Тесты http запросов', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
-        //expect(res.body).to.haveOwnProperty('data')
-
         done();
       });
   });
@@ -90,7 +88,6 @@ describe('Тесты http запросов', () => {
       .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
-          // bdRows: [],
           rootReducer: [],
           currentUser: 'test@test.ru',
           jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY',
@@ -101,8 +98,6 @@ describe('Тесты http запросов', () => {
         expect(res).to.have.status(200);
         expect(res.body).to.haveOwnProperty('result');
         expect(res.body.result).to.equal('OK');
-        //expect(res.body.mes).to.equal("Данные таблицы обновлены")
-
         done();
       });
   });
@@ -114,11 +109,10 @@ describe('Тесты http запросов', () => {
       .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LnJ1IiwiaWF0IjoxNjEyMDc5NzU3fQ.ts4FH3Ei0s-XZb6bmW1vh7yK5OXmi3jSamrZN3-LAHY')
       .send({
         data: {
-          // bdRows: [
           rootReducer: [
             {
               id: 1,
-              persName: 'Задача пользователя 1',
+              persName: 'Задача 1 пользователя',
               bdDate: '13.01.2021, 23:09',
               bdComm: 'Комментарий',
               bdTmz: 'Asia/Yekaterinburg',
@@ -126,7 +120,7 @@ describe('Тесты http запросов', () => {
             },
             {
               id: 2,
-              persName: 'Задача пользователя 2',
+              persName: 'Задача 2 пользователя',
               bdDate: '10.01.2021, 20:27',
               bdComm: 'Длинный комментарий',
               bdTmz: 'Asia/Yekaterinburg',
