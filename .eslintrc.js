@@ -20,5 +20,6 @@ module.exports = {
       },
     ],
     'consistent-return': 0,
+    'linebreak-style': 0
   }
 };
